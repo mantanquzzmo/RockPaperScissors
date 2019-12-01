@@ -14,9 +14,12 @@ class GameVsComp extends Component {
 
   handleClick(event) {
     this.setState({
-      player: event.target.id
+      player: event.target.id,
+      computer: Math.floor(Math.random()*3)
+
     })
   }
+
 
   render() {
     return (
@@ -31,6 +34,7 @@ class GameVsComp extends Component {
     <button id="scissors" onClick={this.handleClick.bind(this)}>
       Rock
     </button>
+    {this.state.computer}
     </div>
     )
   }
