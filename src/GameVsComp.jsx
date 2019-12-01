@@ -4,39 +4,69 @@ class GameVsComp extends Component {
   constructor() {
     super();
     this.state = {
-      player: 0,
-      computer: 0,
-      playerWins: 0, 
-      computerWins: 0, 
-      longestStreak: 0, 
+      player: null,
+      computer: null,
+      playerWins: 0,
+      computerWins: 0,
+      longestStreak: 0
+    };
+  }
+
+  playGame(event) {
+    let computerChoice = ["rock", "paper", "scissors"];
+    this.setState({
+      player: event.target.id,
+      computer: computerChoice[Math.floor(Math.random() * 3)]
+    });
+  }
+
+  displayWinner() {
+    let player = this.state.player;
+    let computer = this.state.computer;
+    if (player == computer) {
+      return <div>it's a tie</div>;
+    }
+    if (player == "rock") {
+      if (computer == "scissors") {
+        return <div>Player wins</div>;
+      } else {
+        return <div>Computer wins</div>;
+      }
+    }
+    if (player == "paper") {
+      if (computer == "rock") {
+        return <div>Player wins</div>;
+      } else {
+        return <div>Computer wins</div>;
+      }
+    }
+    if (player == "scissors") {
+      if (computer == "paper") {
+        return <div>Player wins</div>;
+      } else {
+        return <div>Computer wins</div>;
+      }
     }
   }
 
-  handleClick(event) {
-    this.setState({
-      player: event.target.id,
-      computer: Math.floor(Math.random()*3)
-
-    })
-  }
-
-
   render() {
+    let result = this.displayWinner();
     return (
-    
-    <div>{this.state.player}
-    <button id="rock" onClick={this.handleClick.bind(this)}>
-      Rock
-    </button>
-    <button id="paper" onClick={this.handleClick.bind(this)}>
-      Rock
-    </button>
-    <button id="scissors" onClick={this.handleClick.bind(this)}>
-      Rock
-    </button>
-    {this.state.computer}
-    </div>
-    )
+      <div>
+        {this.state.player}
+        <button id="rock" onClick={this.playGame.bind(this)}>
+          Rock
+        </button>
+        <button id="paper" onClick={this.playGame.bind(this)}>
+          Paper
+        </button>
+        <button id="scissors" onClick={this.playGame.bind(this)}>
+          Scissors
+        </button>
+        {this.state.computer}
+        {result}
+      </div>
+    );
   }
 }
 
