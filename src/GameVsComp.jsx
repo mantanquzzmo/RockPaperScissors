@@ -22,8 +22,14 @@ class GameVsComp extends Component {
   displayWinner() {
     let player = this.state.player;
     let computer = this.state.computer;
+    let firstRound = this.state.playerWins + this.state.computerWins;
+
     if (player == computer) {
-      return <div>it's a tie</div>;
+      if (firstRound == 0) {
+        return;
+      } else {
+        return <div>it's a tie</div>;
+      }
     }
     if (player == "rock") {
       if (computer == "scissors") {
@@ -86,14 +92,15 @@ class GameVsComp extends Component {
           <img
             class="player-hand"
             src={`./assets/${this.state.player}.png`}
-            height="200"
-            width="200"
+            height="220"
+            width="220"
           ></img>
+          <img class="vs" src="./assets/vs.png" height="110" width="120"></img>
           <img
             class="computer-hand"
             src={`./assets/${this.state.computer}.png`}
-            height="200"
-            width="200"
+            height="220"
+            width="220"
           ></img>
         </div>
 

@@ -34,27 +34,36 @@
 .hands {
   display: flex;
   padding: 75px;
+  padding-left: 200px;
+  padding-right: 200px;
   align-self: center;
   justify-content: space-around;
 }
 
 .buttons {
   display: flex;
-  padding: 25px;
-  align-self: center;
+  padding-top: 75px;
+  padding-left: 250px;
+  padding-right: 250px;
   justify-content: space-around;
 }
 .buttons button {
   width: 150px;
   height: 50px;
   font-size: 20px;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: #F3E63D;
   border-color: #FDF155;
   cursor: pointer;
+  font-weight: bold;
+  
 
 }
 
 .player-hand {
   transform: rotateY(180deg);
+}
+
+.vs {
+  padding-top: 50px;
 }
