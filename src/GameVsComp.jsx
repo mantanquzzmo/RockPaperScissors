@@ -28,22 +28,29 @@ class GameVsComp extends Component {
     }
     if (player == "rock") {
       if (computer == "scissors") {
+        this.state.playerWins++;
         return <div>Player wins</div>;
       } else {
+        this.state.computerWins++;
         return <div>Computer wins</div>;
+        
       }
     }
     if (player == "paper") {
       if (computer == "rock") {
+        this.state.playerWins++;
         return <div>Player wins</div>;
       } else {
+        this.state.computerWins++;
         return <div>Computer wins</div>;
       }
     }
     if (player == "scissors") {
       if (computer == "paper") {
+        this.state.playerWins++;
         return <div>Player wins</div>;
       } else {
+        this.state.computerWins++;
         return <div>Computer wins</div>;
       }
     }
@@ -51,8 +58,16 @@ class GameVsComp extends Component {
 
   render() {
     let result = this.displayWinner();
+    let playerWins = this.state.playerWins;
+    let computerWins = this.state.computerWins;
+    if (result == 'Player wins') {
+      this.state.playerWins++;
+      } else if (result == 'Computer wins') {
+      this.state.computerWins++;
+      }
+    
     return (
-      <div>
+      <div className="gameDiv">
         {this.state.player}
         <button id="rock" onClick={this.playGame.bind(this)}>
           Rock
@@ -65,6 +80,8 @@ class GameVsComp extends Component {
         </button>
         {this.state.computer}
         {result}
+        {playerWins}
+        {computerWins}
       </div>
     );
   }
