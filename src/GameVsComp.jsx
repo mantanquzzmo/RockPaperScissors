@@ -7,8 +7,7 @@ class GameVsComp extends Component {
       player: "rock",
       computer: "rock",
       playerWins: 0,
-      computerWins: 0,
-      longestStreak: 0
+      computerWins: 0
     };
   }
 
@@ -28,13 +27,11 @@ class GameVsComp extends Component {
     }
     if (player == "rock") {
       if (computer == "scissors") {
-
         this.state.playerWins++;
         return <div>Player wins</div>;
       } else {
         this.state.computerWins++;
         return <div>Computer wins</div>;
-        
       }
     }
     if (player == "paper") {
@@ -61,35 +58,56 @@ class GameVsComp extends Component {
     let result = this.displayWinner();
     let playerWins = this.state.playerWins;
     let computerWins = this.state.computerWins;
-    if (result == 'Player wins') {
+    if (result == "Player wins") {
       this.state.playerWins++;
-      } else if (result == 'Computer wins') {
+    } else if (result == "Computer wins") {
       this.state.computerWins++;
-      }
-    
+    }
+
     return (
       <div class="gameDiv">
-
         <div class="counter">
-          <h1>Player Score</h1>
+          <div class="player-counter">
+            <h1>Player Score</h1>
             <p>{playerWins}</p>
-          <h1>Computer Score</h1>
-            <p>{computerWins}</p>
-        </div>
-        
-        <div class="hands">
-          <img class="player-hand" src={`./assets/${this.state.player}.png`} height="200" width="200"></img>
-          <img class="computer-hand" src={`./assets/${this.state.computer}.png`} height="200" width="200"></img>
           </div>
+          <div class="computer-counter">
+            <h1>Computer Score</h1>
+            <br></br>
+            <p>{computerWins}</p>
+          </div>
+        </div>
+
+        <div class="result">
+          <h2>{result}</h2>
+        </div>
+
+        <div class="hands">
+          <img
+            class="player-hand"
+            src={`./assets/${this.state.player}.png`}
+            height="200"
+            width="200"
+          ></img>
+          <img
+            class="computer-hand"
+            src={`./assets/${this.state.computer}.png`}
+            height="200"
+            width="200"
+          ></img>
+        </div>
 
         <div class="buttons">
-          <button id="rock" onClick={this.playGame.bind(this)}>Rock</button>
-          <button id="paper" onClick={this.playGame.bind(this)}>Paper</button>
-          <button id="scissors" onClick={this.playGame.bind(this)}>Scissors</button>
+          <button id="rock" onClick={this.playGame.bind(this)}>
+            ROCK
+          </button>
+          <button id="paper" onClick={this.playGame.bind(this)}>
+            PAPER
+          </button>
+          <button id="scissors" onClick={this.playGame.bind(this)}>
+            SCISSORS
+          </button>
         </div>
-        {this.state.computer}
-        {this.state.player}
-        {result}
       </div>
     );
   }
