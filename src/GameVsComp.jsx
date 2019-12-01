@@ -7,7 +7,8 @@ class GameVsComp extends Component {
       player: "rock",
       computer: "rock",
       playerWins: 0,
-      computerWins: 0
+      computerWins: 0,
+      firstRound: 0,
     };
   }
 
@@ -22,11 +23,11 @@ class GameVsComp extends Component {
   displayWinner() {
     let player = this.state.player;
     let computer = this.state.computer;
-    let firstRound = this.state.playerWins + this.state.computerWins;
 
     if (player == computer) {
-      if (firstRound == 0) {
-        return;
+      if (this.state.firstRound == 0) {
+        this.state.firstRound++;
+        return <div>Let's play!</div>
       } else {
         return <div>it's a tie</div>;
       }
