@@ -5,7 +5,6 @@ import GameVsComp from "./GameVsComp";
 const StartingPage = () => {
   return (
     <>
-      <h2>RockPaperScissors</h2>
       <GameVsComp />
     </>
   );

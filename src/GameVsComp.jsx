@@ -4,8 +4,8 @@ class GameVsComp extends Component {
   constructor() {
     super();
     this.state = {
-      player: null,
-      computer: null,
+      player: "rock",
+      computer: "rock",
       playerWins: 0,
       computerWins: 0,
       longestStreak: 0
@@ -28,6 +28,7 @@ class GameVsComp extends Component {
     }
     if (player == "rock") {
       if (computer == "scissors") {
+
         this.state.playerWins++;
         return <div>Player wins</div>;
       } else {
@@ -67,21 +68,28 @@ class GameVsComp extends Component {
       }
     
     return (
-      <div className="gameDiv">
-        {this.state.player}
-        <button id="rock" onClick={this.playGame.bind(this)}>
-          Rock
-        </button>
-        <button id="paper" onClick={this.playGame.bind(this)}>
-          Paper
-        </button>
-        <button id="scissors" onClick={this.playGame.bind(this)}>
-          Scissors
-        </button>
+      <div class="gameDiv">
+
+        <div class="counter">
+          <h1>Player Score</h1>
+            <p>{playerWins}</p>
+          <h1>Computer Score</h1>
+            <p>{computerWins}</p>
+        </div>
+        
+        <div class="hands">
+          <img class="player-hand" src={`./assets/${this.state.player}.png`} height="200" width="200"></img>
+          <img class="computer-hand" src={`./assets/${this.state.computer}.png`} height="200" width="200"></img>
+          </div>
+
+        <div class="buttons">
+          <button id="rock" onClick={this.playGame.bind(this)}>Rock</button>
+          <button id="paper" onClick={this.playGame.bind(this)}>Paper</button>
+          <button id="scissors" onClick={this.playGame.bind(this)}>Scissors</button>
+        </div>
         {this.state.computer}
+        {this.state.player}
         {result}
-        {playerWins}
-        {computerWins}
       </div>
     );
   }
