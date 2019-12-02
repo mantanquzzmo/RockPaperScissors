@@ -8,7 +8,7 @@ class GameVsComp extends Component {
       computer: "rock",
       playerWins: 0,
       computerWins: 0,
-      firstRound: 0,
+      firstRound: 0
     };
   }
 
@@ -22,12 +22,13 @@ class GameVsComp extends Component {
 
   componentDidUpdate() {
     if (this.state.player !== "rock" || this.state.computer !== "rock") {
-      setTimeout( () => { 
+      setTimeout(() => {
         this.setState({
-        player: "rock",
-        computer: "rock"
-      })
-    }, 2000)
+          player: "rock",
+          computer: "rock",
+          firstRound: 0,
+        });
+      }, 1500);
     }
   }
 
@@ -37,7 +38,7 @@ class GameVsComp extends Component {
     if (player == computer) {
       if (this.state.firstRound == 0) {
         this.state.firstRound++;
-        return <div>Let's play!</div>
+        return <div>Let's play!</div>;
       } else {
         return <div>it's a tie</div>;
       }
@@ -68,15 +69,16 @@ class GameVsComp extends Component {
         this.state.computerWins++;
         return <div>Computer wins</div>;
       }
-    }  
+    }
   }
-    
+
   render() {
     let result = this.displayWinner();
     let playerWins = this.state.playerWins;
     let computerWins = this.state.computerWins;
-    let bindButton = () => { 
-      return this.playGame.bind(this)}
+    let bindButton = () => {
+      return this.playGame.bind(this);
+    };
     if (result == "Player wins") {
       this.state.playerWins++;
     } else if (result == "Computer wins") {
