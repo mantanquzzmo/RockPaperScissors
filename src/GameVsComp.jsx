@@ -57,10 +57,9 @@ class GameVsComp extends Component {
         this.state.computerWins++;
         return <div>Computer wins</div>;
       }
-    }
-    
+    }  
   }
-
+    
   render() {
     let result = this.displayWinner();
     let playerWins = this.state.playerWins;
@@ -82,13 +81,12 @@ class GameVsComp extends Component {
           </div>
           <div class="computer-counter">
             <h1>Computer Score</h1>
-            <br></br>
             <p>{computerWins}</p>
           </div>
         </div>
 
         <div class="result">
-          <h2>{result}</h2>
+          <h1>{result}</h1>
         </div>
 
         <div class="hands">

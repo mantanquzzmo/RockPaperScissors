@@ -18,8 +18,15 @@
   align-items: center;
 }
 
+.player-counter {
+  padding-left: 250px;
+}
+.computer-counter {
+  padding-right: 250px;
+}
+
 .result {
-  color: rgb(252, 239, 239);
+  color: rgb(248, 237, 237);
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -34,8 +41,8 @@
 .hands {
   display: flex;
   padding: 75px;
-  padding-left: 200px;
-  padding-right: 200px;
+  padding-left: 220px;
+  padding-right: 220px;
   align-self: center;
   justify-content: space-around;
 }
