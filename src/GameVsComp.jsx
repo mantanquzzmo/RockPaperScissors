@@ -9,7 +9,6 @@ class GameVsComp extends Component {
       playerWins: 0,
       computerWins: 0,
       firstRound: 0,
-      timer: null,
     };
   }
 
