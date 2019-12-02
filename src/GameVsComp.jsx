@@ -20,6 +20,17 @@ class GameVsComp extends Component {
     });
   }
 
+  componentDidUpdate() {
+    if (this.state.player !== "rock" || this.state.computer !== "rock") {
+      setTimeout( () => { 
+        this.setState({
+        player: "rock",
+        computer: "rock"
+      })
+    }, 2000)
+    }
+  }
+
   displayWinner() {
     let player = this.state.player;
     let computer = this.state.computer;
