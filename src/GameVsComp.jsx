@@ -9,6 +9,7 @@ class GameVsComp extends Component {
       playerWins: 0,
       computerWins: 0,
       firstRound: 0,
+      timer: null,
     };
   }
 
@@ -23,7 +24,6 @@ class GameVsComp extends Component {
   displayWinner() {
     let player = this.state.player;
     let computer = this.state.computer;
-
     if (player == computer) {
       if (this.state.firstRound == 0) {
         this.state.firstRound++;
@@ -59,12 +59,15 @@ class GameVsComp extends Component {
         return <div>Computer wins</div>;
       }
     }
+    
   }
 
   render() {
     let result = this.displayWinner();
     let playerWins = this.state.playerWins;
     let computerWins = this.state.computerWins;
+    let bindButton = () => { 
+      return this.playGame.bind(this)}
     if (result == "Player wins") {
       this.state.playerWins++;
     } else if (result == "Computer wins") {
@@ -106,13 +109,13 @@ class GameVsComp extends Component {
         </div>
 
         <div class="buttons">
-          <button id="rock" onClick={this.playGame.bind(this)}>
+          <button id="rock" onClick={bindButton()}>
             ROCK
           </button>
-          <button id="paper" onClick={this.playGame.bind(this)}>
+          <button id="paper" onClick={bindButton()}>
             PAPER
           </button>
-          <button id="scissors" onClick={this.playGame.bind(this)}>
+          <button id="scissors" onClick={bindButton()}>
             SCISSORS
           </button>
         </div>
