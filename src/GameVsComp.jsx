@@ -8,8 +8,8 @@ class GameVsComp extends Component {
       computer: "rock",
       playerWins: 0,
       computerWins: 0,
-      firstRound: 0,
-      round: 1,
+      setHandsDefault: 0,
+      round: 1
     };
   }
 
@@ -28,9 +28,20 @@ class GameVsComp extends Component {
         this.setState({
           player: "rock",
           computer: "rock",
-          firstRound: 0,
+          setHandsDefault: 0
         });
-      }, 1500);
+      }, 1000);
+    } else if (
+      this.state.setHandsDefault !== 0 &&
+      this.displayWinner().props.children == "it's a tie"
+    ) {
+      setTimeout(() => {
+        this.setState({
+          player: "rock",
+          computer: "rock",
+          setHandsDefault: 0
+        });
+      }, 1000);
     }
   }
 
@@ -39,8 +50,8 @@ class GameVsComp extends Component {
     let computer = this.state.computer;
     let round = this.state.round;
     if (player == computer) {
-      if (this.state.firstRound == 0) {
-        this.state.firstRound++;
+      if (this.state.setHandsDefault == 0) {
+        this.state.setHandsDefault++;
         return <div>Round: {round} Fight!</div>;
       } else {
         return <div>it's a tie</div>;
