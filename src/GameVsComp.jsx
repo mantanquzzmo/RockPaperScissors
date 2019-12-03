@@ -9,12 +9,13 @@ class GameVsComp extends Component {
       playerWins: 0,
       computerWins: 0,
       firstRound: 0,
-      round: 0,
+      round: 1,
     };
   }
 
   playGame(event) {
     let computerChoice = ["rock", "paper", "scissors"];
+    this.state.round++;
     this.setState({
       player: event.target.id,
       computer: computerChoice[Math.floor(Math.random() * 3)]
@@ -36,10 +37,11 @@ class GameVsComp extends Component {
   displayWinner() {
     let player = this.state.player;
     let computer = this.state.computer;
+    let round = this.state.round;
     if (player == computer) {
       if (this.state.firstRound == 0) {
         this.state.firstRound++;
-        return <div>Let's play!</div>;
+        return <div>Round: {round} Fight!</div>;
       } else {
         return <div>it's a tie</div>;
       }
