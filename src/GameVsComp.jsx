@@ -8,7 +8,6 @@ class GameVsComp extends Component {
       computer: "rock2",
       playerWins: 0,
       computerWins: 0,
-      setHandsDefault: 0,
       round: 1
     };
   }
