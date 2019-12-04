@@ -4,8 +4,8 @@ class GameVsComp extends Component {
   constructor() {
     super();
     this.state = {
-      player: "rock",
-      computer: "rock",
+      player: "rock1",
+      computer: "rock2",
       playerWins: 0,
       computerWins: 0,
       setHandsDefault: 0,
@@ -23,12 +23,11 @@ class GameVsComp extends Component {
   }
 
   componentDidUpdate() {
-    if (this.state.player !== "rock" || this.state.computer !== "rock") {
+    if (this.state.player !== "rock1" || this.state.computer !== "rock2") {
       setTimeout(() => {
         this.setState({
-          player: "rock",
-          computer: "rock",
-          setHandsDefault: 0
+          player: "rock1",
+          computer: "rock2"
         });
       }, 1000);
     }
@@ -38,14 +37,14 @@ class GameVsComp extends Component {
     let player = this.state.player;
     let computer = this.state.computer;
     let round = this.state.round;
-    if (player == computer) {
-      if (this.state.setHandsDefault == 0) {
-        this.state.setHandsDefault++;
-        return <div>Round: {round} Fight!</div>;
-      } else {
-        return <div>it's a tie</div>;
-      }
+
+    if (player == "rock1") {
+      return <div>Round: {round} Fight!</div>;
     }
+    if (player == computer) {
+      return <div>it's a tie</div>;
+    }
+
     if (player == "rock") {
       if (computer == "scissors") {
         this.state.playerWins++;
