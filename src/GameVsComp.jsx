@@ -31,17 +31,6 @@ class GameVsComp extends Component {
           setHandsDefault: 0
         });
       }, 1000);
-    } else if (
-      this.state.setHandsDefault !== 0 &&
-      this.displayWinner().props.children == "it's a tie"
-    ) {
-      setTimeout(() => {
-        this.setState({
-          player: "rock",
-          computer: "rock",
-          setHandsDefault: 0
-        });
-      }, 1000);
     }
   }
 
