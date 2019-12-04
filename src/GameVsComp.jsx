@@ -22,7 +22,7 @@ class GameVsComp extends Component {
   }
 
   componentDidUpdate() {
-    if (this.state.player !== "rock1" || this.state.computer !== "rock2") {
+    if (this.state.player !== "rock1") {
       setTimeout(() => {
         this.setState({
           player: "rock1",
