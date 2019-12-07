@@ -37,7 +37,7 @@
 .hands {
   position: relative;
   display: flex;
-  padding-top: 75px;
+  padding-top: 50px;
   padding-left: 220px;
   padding-right: 220px;
   align-self: center;
@@ -49,7 +49,7 @@
   position: relative;
   margin-top: -300px;
   display: flex;
-  padding-top: 75px;
+  padding-top: 50px;
   padding-left: 220px;
   padding-right: 220px;
   align-self: center;
@@ -85,6 +85,22 @@
   padding-top: 50px;
 }
 
+.vs1 {
+  padding-top: 80px;
+}
+
 .counter h3 {
   font-size: 30px;
+}
+
+.round {
+  color: #F3E63D;
+  font-size: 30px;
+  padding-bottom: -50px;
+}
+
+.result {
+  color: #F3E63D;
+  font-size: 30px;
+  padding-bottom: -50px;
 }

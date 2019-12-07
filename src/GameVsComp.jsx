@@ -14,13 +14,6 @@ class GameVsComp extends Component {
     };
   }
 
-  // animate() {
-  //   if (this.state.anime == "hidden") {
-  //     return "visible"
-  //   } else {
-  //     return "visible"
-  //   }
-  //   }
 
   playGame(event) {
     this.setState({
@@ -155,7 +148,7 @@ class GameVsComp extends Component {
             height="220"
             width="220"
           ></img>
-          <img class="vs" src="./assets/vs.png" height="110" width="120"></img>
+          <img class="vs1" src="./assets/vs.png" height="110" width="120"></img>
           <img
             class="computer-hand"
             src={`./assets/anime.gif`}
