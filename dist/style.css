@@ -16,36 +16,53 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  padding-left: 550px;
+  padding-right: 550px;
 }
 
 .result {
-  color: rgb(252, 239, 239);
+  color: rgb(248, 237, 237);
   display: flex;
   justify-content: space-around;
   align-items: center;
+  padding-top: 50px;
 }
 
 .counter p {
-  font-size: 25px;
+  font-size: 70px;
   text-align: center;
   padding: 10px;
 }
 
 .hands {
+  position: relative;
   display: flex;
-  padding: 75px;
-  padding-left: 200px;
-  padding-right: 200px;
+  padding-top: 50px;
+  padding-left: 220px;
+  padding-right: 220px;
   align-self: center;
   justify-content: space-around;
+  z-index: 1;
+}
+
+.anime {
+  position: relative;
+  margin-top: -300px;
+  display: flex;
+  padding-top: 50px;
+  padding-left: 220px;
+  padding-right: 220px;
+  align-self: center;
+  justify-content: space-around;
+  z-index: 2;
 }
 
 .buttons {
   display: flex;
-  padding-top: 75px;
   padding-left: 250px;
   padding-right: 250px;
   justify-content: space-around;
+  padding-top: 125px;
 }
 .buttons button {
   width: 150px;
@@ -66,4 +83,24 @@
 
 .vs {
   padding-top: 50px;
+}
+
+.vs1 {
+  padding-top: 80px;
+}
+
+.counter h3 {
+  font-size: 30px;
+}
+
+.round {
+  color: #F3E63D;
+  font-size: 30px;
+  padding-bottom: -50px;
+}
+
+.result {
+  color: #F3E63D;
+  font-size: 30px;
+  padding-bottom: -50px;
 }
