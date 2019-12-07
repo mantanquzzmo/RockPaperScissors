@@ -39,12 +39,27 @@
 }
 
 .hands {
+  position: relative;
+  margin-top: 3px;
   display: flex;
   padding: 75px;
   padding-left: 220px;
   padding-right: 220px;
   align-self: center;
   justify-content: space-around;
+  z-index: 1;
+}
+
+.anime {
+  position: relative;
+  margin-top: -360px;
+  display: flex;
+  padding: 75px;
+  padding-left: 220px;
+  padding-right: 220px;
+  align-self: center;
+  justify-content: space-around;
+  z-index: 2;
 }
 
 .buttons {
