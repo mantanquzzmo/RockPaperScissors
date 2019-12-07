@@ -16,13 +16,8 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-}
-
-.player-counter {
-  padding-left: 250px;
-}
-.computer-counter {
-  padding-right: 250px;
+  padding-left: 550px;
+  padding-right: 550px;
 }
 
 .result {
@@ -30,19 +25,19 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  padding-top: 50px;
 }
 
 .counter p {
-  font-size: 25px;
+  font-size: 70px;
   text-align: center;
   padding: 10px;
 }
 
 .hands {
   position: relative;
-  margin-top: 3px;
   display: flex;
-  padding: 75px;
+  padding-top: 75px;
   padding-left: 220px;
   padding-right: 220px;
   align-self: center;
@@ -52,9 +47,9 @@
 
 .anime {
   position: relative;
-  margin-top: -360px;
+  margin-top: -300px;
   display: flex;
-  padding: 75px;
+  padding-top: 75px;
   padding-left: 220px;
   padding-right: 220px;
   align-self: center;
@@ -64,10 +59,10 @@
 
 .buttons {
   display: flex;
-  padding-top: 75px;
   padding-left: 250px;
   padding-right: 250px;
   justify-content: space-around;
+  padding-top: 125px;
 }
 .buttons button {
   width: 150px;
@@ -90,3 +85,6 @@
   padding-top: 50px;
 }
 
+.counter h3 {
+  font-size: 30px;
+}

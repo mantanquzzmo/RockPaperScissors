@@ -16,18 +16,17 @@ class GameVsComp extends Component {
 
   // animate() {
   //   if (this.state.anime == "hidden") {
-  //     return "visible" 
+  //     return "visible"
   //   } else {
   //     return "visible"
   //   }
   //   }
 
-
   playGame(event) {
     this.setState({
       anime: "visible",
       anime2: "hidden"
-    })
+    });
     let computerChoice = ["rock", "paper", "scissors"];
     this.state.round++;
     this.setState({
@@ -48,8 +47,6 @@ class GameVsComp extends Component {
       });
     }, 2500);
   }
-
-
 
   displayWinner() {
     let player = this.state.player;
@@ -96,8 +93,8 @@ class GameVsComp extends Component {
     let result = this.displayWinner();
     let playerWins = this.state.playerWins;
     let computerWins = this.state.computerWins;
-    let anime = this.state.anime
-    let anime2 = this.state.anime2
+    let anime = this.state.anime;
+    let anime2 = this.state.anime2;
     let bindButton = () => {
       return this.playGame.bind(this);
     };
@@ -111,20 +108,23 @@ class GameVsComp extends Component {
       <div class="gameDiv">
         <div class="counter">
           <div class="player-counter">
-            <h1>Player Score</h1>
-            <p style={{visibility: anime2}}>{playerWins}</p>
+            <p style={{ visibility: anime2 }}>{playerWins}</p>
+            <h3>Player</h3>
+          </div>
+          <div class="colon">
+            <h1>:</h1>
           </div>
           <div class="computer-counter">
-            <h1>Computer Score</h1>
-            <p style={{visibility: anime2}}>{computerWins}</p>
+            <p style={{ visibility: anime2 }}>{computerWins}</p>
+            <h3>Computer</h3>
           </div>
         </div>
 
         <div class="result">
-          <h1 style={{visibility: anime2}}>{result}</h1>
+          <h2 style={{ visibility: anime2 }}>{result}</h2>
         </div>
 
-        <div class="hands" style={{visibility: anime2}}>
+        <div class="hands" style={{ visibility: anime2 }}>
           <img
             class="player-hand"
             src={`./assets/${this.state.player}.png`}
@@ -140,7 +140,7 @@ class GameVsComp extends Component {
           ></img>
         </div>
 
-        <div class="anime" style={{visibility: anime}}>
+        <div class="anime" style={{ visibility: anime }}>
           <img
             class="player-hand"
             src={`./assets/anime.gif`}
