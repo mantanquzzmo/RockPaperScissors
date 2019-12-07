@@ -14,7 +14,6 @@ class GameVsComp extends Component {
     };
   }
 
-
   playGame(event) {
     this.setState({
       anime: "visible",
