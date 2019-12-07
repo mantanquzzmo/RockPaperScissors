@@ -34,6 +34,7 @@ class GameVsComp extends Component {
       computer: computerChoice[Math.floor(Math.random() * 3)]
     });
     setTimeout(() => {
+      this.scoreCounter();
       this.setState({
         anime: "hidden",
         anime2: "visible"
@@ -62,30 +63,37 @@ class GameVsComp extends Component {
 
     if (player == "rock") {
       if (computer == "scissors") {
-        this.state.playerWins++;
         return <div>Player wins</div>;
       } else {
-        this.state.computerWins++;
         return <div>Computer wins</div>;
       }
     }
     if (player == "paper") {
       if (computer == "rock") {
-        this.state.playerWins++;
         return <div>Player wins</div>;
       } else {
-        this.state.computerWins++;
         return <div>Computer wins</div>;
       }
     }
     if (player == "scissors") {
       if (computer == "paper") {
-        this.state.playerWins++;
         return <div>Player wins</div>;
       } else {
-        this.state.computerWins++;
         return <div>Computer wins</div>;
       }
+    }
+  }
+
+  scoreCounter() {
+    let result = this.displayWinner();
+    switch (result.props.children) {
+      case "Player wins":
+        this.state.playerWins++;
+        break;
+
+      case "Computer wins":
+        this.state.computerWins++;
+        break;
     }
   }
 
@@ -108,14 +116,14 @@ class GameVsComp extends Component {
       <div class="gameDiv">
         <div class="counter">
           <div class="player-counter">
-            <p style={{ visibility: anime2 }}>{playerWins}</p>
+            <p>{playerWins}</p>
             <h3>Player</h3>
           </div>
           <div class="colon">
             <h1>:</h1>
           </div>
           <div class="computer-counter">
-            <p style={{ visibility: anime2 }}>{computerWins}</p>
+            <p>{computerWins}</p>
             <h3>Computer</h3>
           </div>
         </div>
