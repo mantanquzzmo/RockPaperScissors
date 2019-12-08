@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import GameVsAI from "./GameVsAI";
+import GameVsComp from "./GameVsComp";
 
 const StartingPage = () => {
   return (
     <>
-      <GameVsAI />
+      <GameVsComp />
     </>
   );
 };

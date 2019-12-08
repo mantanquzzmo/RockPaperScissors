@@ -15,16 +15,20 @@ class GameVsComp extends Component {
   }
 
   playGame(event) {
+    let onClickValue = event.target.id
     this.setState({
       anime: "visible",
       anime2: "hidden"
     });
+    
     let computerChoice = ["rock", "paper", "scissors"];
-    this.state.round++;
-    this.setState({
-      player: event.target.id,
-      computer: computerChoice[Math.floor(Math.random() * 3)]
-    });
+    this.setState((prevState, _props) => {
+      return {
+      player: onClickValue,
+      computer: computerChoice[Math.floor(Math.random() * 3)],
+      round: prevState.round + 1
+    }});
+
     setTimeout(() => {
       this.scoreCounter();
       this.setState({
@@ -80,11 +84,23 @@ class GameVsComp extends Component {
     let result = this.displayWinner();
     switch (result.props.children) {
       case "Player wins":
-        this.state.playerWins++;
+        this.setState((prevState, _props) => {
+          
+          if (prevState.lastRound == "Win") {
+          }
+          return {
+            playerWins: prevState.playerWins + 1
+          };
+        });
         break;
 
       case "Computer wins":
-        this.state.computerWins++;
+        this.setState((prevState, _props) => {
+          if (prevState.lastRound == "Loss") {}
+          return {
+            computerWins: prevState.computerWins + 1
+          };
+        });
         break;
     }
   }
@@ -98,15 +114,16 @@ class GameVsComp extends Component {
     let bindButton = () => {
       return this.playGame.bind(this);
     };
-    if (result == "Player wins") {
-      this.state.playerWins++;
-    } else if (result == "Computer wins") {
-      this.state.computerWins++;
-    }
 
     return (
       <div class="gameDiv">
         <div class="counter">
+          <img
+            class="player-pic"
+            src={`./assets/player.png`}
+            height="120"
+            width="120"
+          ></img>
           <div class="player-counter">
             <p>{playerWins}</p>
             <h3>Player</h3>
@@ -116,8 +133,14 @@ class GameVsComp extends Component {
           </div>
           <div class="computer-counter">
             <p>{computerWins}</p>
-            <h3>Computer</h3>
+            <h3>Random</h3>
           </div>
+          <img
+            class="ai-pic"
+            src={`./assets/computer.png`}
+            height="120"
+            width="120"
+          ></img>
         </div>
 
         <div class="result">
