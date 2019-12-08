@@ -17,21 +17,26 @@ class GameVsAI extends Component {
   }
 
   playGame(event) {
-    switch (this.state.lastRound) {
-      case "Win":
-        this.state.winLastHand.push(event.target.id)
-        break;
-      case "Loss":
-        this.state.loseLastHand.push(event.target.id)
-        break;
-      case "Draw":
-          this.state.drawLastHand.push(event.target.id)
-        break;
-    }
-    this.state.round++;
-    this.setState({
-      player: event.target.id,
-      computer: this.aiGenerator(this.state.lastRound)
+    let id = event.target.id;
+    this.setState((prevState, _props) => {
+      switch (this.state.lastRound) {
+        case "Win":
+          prevState.winLastHand.push(id);
+          break;
+        case "Loss":
+          prevState.loseLastHand.push(id);
+          break;
+        case "Draw":
+          prevState.drawLastHand.push(id);
+          break;
+      }
+    });
+    this.setState((prevState, _props) => {
+      return {
+        player: id,
+        computer: this.aiGenerator(this.state.lastRound),
+        round: prevState.round + 1
+      };
     });
     setTimeout(() => {
       this.scoreCounter();
@@ -44,11 +49,11 @@ class GameVsAI extends Component {
 
   aiGenerator() {
     let wonLastHand = this.state.winLastHand;
-    this.aiConverter(wonLastHand)
+    this.aiConverter(wonLastHand);
     let lostLastHand = this.state.loseLastHand;
-    this.aiConverter(lostLastHand)
+    this.aiConverter(lostLastHand);
     let drewLastHand = this.state.drawLastHand;
-    this.aiConverter(drewLastHand)
+    this.aiConverter(drewLastHand);
     switch (this.state.lastRound) {
       case "Win":
         return wonLastHand[Math.floor(Math.random() * wonLastHand.length)];
@@ -63,10 +68,10 @@ class GameVsAI extends Component {
 
   aiConverter(array) {
     array.forEach(function(item, i) {
-      if (item == "rock") array[i] = "paper"
-      if (item == "paper") array[i] = "scissors"
-      if (item == "scissors") array[i] = "rock"
-    })
+      if (item == "rock") array[i] = "paper";
+      if (item == "paper") array[i] = "scissors";
+      if (item == "scissors") array[i] = "rock";
+    });
   }
 
   displayWinner() {
@@ -108,42 +113,46 @@ class GameVsAI extends Component {
     let result = this.displayWinner();
     switch (result.props.children) {
       case "Player wins":
-        this.state.playerWins++;
-        this.setState(function(prevState, _props) {
+        this.setState((prevState, _props) => {
           if (prevState.lastRound == "Win") {
           }
           return {
-            lastRound: "Win"
+            lastRound: "Win",
+            playerWins: prevState.playerWins + 1
           };
         });
         break;
 
       case "Computer wins":
-        this.state.computerWins++;
-        this.setState(function(prevState, _props) {
+        this.setState((prevState, _props) => {
           if (prevState.lastRound == "Loss") {
           }
           return {
-            lastRound: "Loss"
+            lastRound: "Loss",
+            computerWins: prevState.computerWins + 1
           };
         });
         break;
 
       case "it's a tie":
-        this.setState(function(prevState, _props) {
+        this.setState((prevState, _props) => {
           if (prevState.lastRound == "Draw")
-          return {
-            lastRound: "Draw"
-          };
+            return {
+              lastRound: "Draw"
+            };
         });
         break;
     }
   }
-  // possible to create arrays of prevState - 2 spaces back and check for the hand after
+
   render() {
     let result = this.displayWinner();
     let playerWins = this.state.playerWins;
     let computerWins = this.state.computerWins;
+    let aiIQ =
+      this.state.loseLastHand.length +
+      this.state.winLastHand.length +
+      this.state.drawLastHand.length;
     let bindButton = () => {
       return this.playGame.bind(this);
     };
@@ -151,7 +160,7 @@ class GameVsAI extends Component {
     return (
       <div class="gameDiv">
         <div class="counter">
-        <img
+          <img
             class="player-pic"
             src={`./assets/player.png`}
             height="120"
