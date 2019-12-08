@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class GameVsComp extends Component {
+class GameVsAI extends Component {
   constructor() {
     super();
     this.state = {
@@ -17,7 +17,6 @@ class GameVsComp extends Component {
   }
 
   playGame(event) {
-    let computerChoice = ["rock", "paper", "scissors"];
     this.state.round++;
     this.setState({
       player: event.target.id,
@@ -30,7 +29,6 @@ class GameVsComp extends Component {
         anime2: "visible"
       });
     }, 1);
-    console.log(this.state.winLastHand)
   }
 
   aiGenerator() {
@@ -89,7 +87,7 @@ class GameVsComp extends Component {
     switch (result.props.children) {
       case "Player wins":
         this.state.playerWins++
-        this.setState(function(prevState, props) {
+        this.setState(function(prevState, _props) {
           if (prevState.lastRound == "Win") {
           }
         return {lastRound: "Win",
@@ -98,7 +96,7 @@ class GameVsComp extends Component {
 
       case "Computer wins":
         this.state.computerWins++;
-        this.setState(function(prevState, props) {
+        this.setState(function(prevState, _props) {
           if (prevState.lastRound == "Loss") {
           }
         return {lastRound: "Loss",
@@ -106,10 +104,11 @@ class GameVsComp extends Component {
         break;
         
       case "it's a tie":
-        this.setState(function(prevState, props) {
-          if (prevState.lastRound == "Draw") {
-          }
-        return {lastRound: "Draw",
+        this.setState(function(prevState, _props) {
+          if (prevState.lastRound == "Draw")
+          console.log(this.state.player)
+          console.log(this.state.drawLastHand)
+          return {lastRound: "Draw",
                 drawLastHand: [...prevState.drawLastHand, this.state.player]}})
         break;
     }
@@ -176,4 +175,4 @@ class GameVsComp extends Component {
   }
 }
 
-export default GameVsComp;
+export default GameVsAI;
