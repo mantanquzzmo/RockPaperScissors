@@ -1,48 +1,78 @@
 import React, { Component } from "react";
 
-class GameVsComp extends Component {
+class GameVsAI extends Component {
   constructor() {
     super();
+    let startingArray = ["rock", "paper", "scissors"]
     this.state = {
       player: "default1",
       computer: "default2",
       playerWins: 0,
       computerWins: 0,
       round: 1,
-      anime: "hidden",
-      anime2: "visible"
+      lastRound: "Draw",
+      winLastHand: startingArray,
+      loseLastHand: startingArray,
+      drawLastHand: startingArray
     };
   }
 
   playGame(event) {
-    let onClickValue = event.target.id
-    this.setState({
-      anime: "visible",
-      anime2: "hidden"
+    let id = event.target.id;
+    this.setState((prevState, _props) => {
+      switch (this.state.lastRound) {
+        case "Win":
+          prevState.winLastHand.push(id);
+          break;
+        case "Loss":
+          prevState.loseLastHand.push(id);
+          break;
+        case "Draw":
+          prevState.drawLastHand.push(id);
+          break;
+      }
     });
-    
-    let computerChoice = ["rock", "paper", "scissors"];
     this.setState((prevState, _props) => {
       return {
-      player: onClickValue,
-      computer: computerChoice[Math.floor(Math.random() * 3)],
-      round: prevState.round + 1
-    }});
-
+        player: id,
+        computer: this.aiGenerator(this.state.lastRound),
+        round: prevState.round + 1
+      };
+    });
     setTimeout(() => {
       this.scoreCounter();
       this.setState({
         anime: "hidden",
         anime2: "visible"
       });
-    }, 1200);
+    }, 1);
+  }
 
-    setTimeout(() => {
-      this.setState({
-        player: "default1",
-        computer: "default2"
-      });
-    }, 2500);
+  aiGenerator() {
+    let wonLastHand = this.state.winLastHand;
+    this.aiConverter(wonLastHand);
+    let lostLastHand = this.state.loseLastHand;
+    this.aiConverter(lostLastHand);
+    let drewLastHand = this.state.drawLastHand;
+    this.aiConverter(drewLastHand);
+    switch (this.state.lastRound) {
+      case "Win":
+        return wonLastHand[Math.floor(Math.random() * wonLastHand.length)];
+
+      case "Loss":
+        return lostLastHand[Math.floor(Math.random() * lostLastHand.length)];
+
+      case "Draw":
+        return drewLastHand[Math.floor(Math.random() * drewLastHand.length)];
+    }
+  }
+
+  aiConverter(array) {
+    array.forEach(function(item, i) {
+      if (item == "rock") array[i] = "paper";
+      if (item == "paper") array[i] = "scissors";
+      if (item == "scissors") array[i] = "rock";
+    });
   }
 
   displayWinner() {
@@ -85,10 +115,10 @@ class GameVsComp extends Component {
     switch (result.props.children) {
       case "Player wins":
         this.setState((prevState, _props) => {
-          
           if (prevState.lastRound == "Win") {
           }
           return {
+            lastRound: "Win",
             playerWins: prevState.playerWins + 1
           };
         });
@@ -96,10 +126,21 @@ class GameVsComp extends Component {
 
       case "Computer wins":
         this.setState((prevState, _props) => {
-          if (prevState.lastRound == "Loss") {}
+          if (prevState.lastRound == "Loss") {
+          }
           return {
+            lastRound: "Loss",
             computerWins: prevState.computerWins + 1
           };
+        });
+        break;
+
+      case "it's a tie":
+        this.setState((prevState, _props) => {
+          if (prevState.lastRound == "Draw")
+            return {
+              lastRound: "Draw"
+            };
         });
         break;
     }
@@ -109,8 +150,10 @@ class GameVsComp extends Component {
     let result = this.displayWinner();
     let playerWins = this.state.playerWins;
     let computerWins = this.state.computerWins;
-    let anime = this.state.anime;
-    let anime2 = this.state.anime2;
+    let aiIQ =
+      this.state.loseLastHand.length +
+      this.state.winLastHand.length +
+      this.state.drawLastHand.length;
     let bindButton = () => {
       return this.playGame.bind(this);
     };
@@ -133,21 +176,21 @@ class GameVsComp extends Component {
           </div>
           <div class="computer-counter">
             <p>{computerWins}</p>
-            <h3>Random</h3>
+            <h3>"AI"</h3>
           </div>
           <img
             class="ai-pic"
-            src={`./assets/computer.png`}
+            src={`./assets/ai.png`}
             height="120"
             width="120"
           ></img>
         </div>
 
         <div class="result">
-          <h2 style={{ visibility: anime2 }}>{result}</h2>
+          <h2>{result}</h2>
         </div>
 
-        <div class="hands" style={{ visibility: anime2 }}>
+        <div class="hands">
           <img
             class="player-hand"
             src={`./assets/${this.state.player}.png`}
@@ -158,22 +201,6 @@ class GameVsComp extends Component {
           <img
             class="computer-hand"
             src={`./assets/${this.state.computer}.png`}
-            height="220"
-            width="220"
-          ></img>
-        </div>
-
-        <div class="anime" style={{ visibility: anime }}>
-          <img
-            class="player-hand"
-            src={`./assets/anime.gif`}
-            height="220"
-            width="220"
-          ></img>
-          <img class="vs1" src="./assets/vs.png" height="110" width="120"></img>
-          <img
-            class="computer-hand"
-            src={`./assets/anime.gif`}
             height="220"
             width="220"
           ></img>
@@ -195,4 +222,4 @@ class GameVsComp extends Component {
   }
 }
 
-export default GameVsComp;
+export default GameVsAI;
