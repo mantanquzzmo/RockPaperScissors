@@ -9,7 +9,7 @@ class GameVsAI extends Component {
       playerWins: 0,
       computerWins: 0,
       round: 1,
-      lastRound: "Win",
+      lastRound: "Draw",
       winLastHand: ["rock", "paper", "scissors"],
       loseLastHand: ["rock", "paper", "scissors"],
       drawLastHand: ["rock", "paper", "scissors"]
@@ -17,6 +17,17 @@ class GameVsAI extends Component {
   }
 
   playGame(event) {
+    switch (this.state.lastRound) {
+      case "Win":
+        this.state.winLastHand.push(event.target.id)
+        break;
+      case "Loss":
+        this.state.loseLastHand.push(event.target.id)
+        break;
+      case "Draw":
+          this.state.drawLastHand.push(event.target.id)
+        break;
+    }
     this.state.round++;
     this.setState({
       player: event.target.id,
@@ -91,8 +102,7 @@ class GameVsAI extends Component {
           if (prevState.lastRound == "Win") {
           }
           return {
-            lastRound: "Win",
-            winLastHand: [...prevState.winLastHand, this.state.player]
+            lastRound: "Win"
           };
         });
         break;
@@ -103,19 +113,16 @@ class GameVsAI extends Component {
           if (prevState.lastRound == "Loss") {
           }
           return {
-            lastRound: "Loss",
-            loseLastHand: [...prevState.loseLastHand, this.state.player]
+            lastRound: "Loss"
           };
         });
         break;
 
       case "it's a tie":
         this.setState(function(prevState, _props) {
-          if (prevState.lastRound == "Draw") console.log(this.state.player);
-          console.log(this.state.drawLastHand);
+          if (prevState.lastRound == "Draw")
           return {
-            lastRound: "Draw",
-            drawLastHand: [...prevState.drawLastHand, this.state.player]
+            lastRound: "Draw"
           };
         });
         break;
