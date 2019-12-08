@@ -140,6 +140,12 @@ class GameVsAI extends Component {
     return (
       <div class="gameDiv">
         <div class="counter">
+        <img
+            class="player-pic"
+            src={`./assets/player.png`}
+            height="120"
+            width="120"
+          ></img>
           <div class="player-counter">
             <p>{playerWins}</p>
             <h3>Player</h3>
@@ -149,8 +155,14 @@ class GameVsAI extends Component {
           </div>
           <div class="computer-counter">
             <p>{computerWins}</p>
-            <h3>Computer</h3>
+            <h3>"AI"</h3>
           </div>
+          <img
+            class="ai-pic"
+            src={`./assets/ai.png`}
+            height="120"
+            width="120"
+          ></img>
         </div>
 
         <div class="result">
