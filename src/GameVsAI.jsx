@@ -3,6 +3,7 @@ import React, { Component } from "react";
 class GameVsAI extends Component {
   constructor() {
     super();
+    let startingArray = ["rock", "paper", "scissors"]
     this.state = {
       player: "default1",
       computer: "default2",
@@ -10,9 +11,9 @@ class GameVsAI extends Component {
       computerWins: 0,
       round: 1,
       lastRound: "Draw",
-      winLastHand: ["rock", "paper", "scissors"],
-      loseLastHand: ["rock", "paper", "scissors"],
-      drawLastHand: ["rock", "paper", "scissors"]
+      winLastHand: startingArray,
+      loseLastHand: startingArray,
+      drawLastHand: startingArray
     };
   }
 
