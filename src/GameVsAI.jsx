@@ -11,6 +11,8 @@ class GameVsAI extends Component {
       playerWins: 0,
       computerWins: 0,
       round: 1,
+      anime: "hidden",
+      anime2: "visible",
       lastRound: "Draw",
       winLastHand: startingArray,
       loseLastHand: startingArray,
@@ -20,6 +22,10 @@ class GameVsAI extends Component {
 
   playGame(event) {
     let id = event.target.id;
+    this.setState({
+      anime: "visible",
+      anime2: "hidden"
+    });
     this.setState((prevState, _props) => {
       switch (this.state.lastRound) {
         case "Win":
@@ -46,7 +52,14 @@ class GameVsAI extends Component {
         anime: "hidden",
         anime2: "visible"
       });
-    }, 1);
+    }, 1200);
+
+    setTimeout(() => {
+      this.setState({
+        player: "default1",
+        computer: "default2"
+      });
+    }, 2500);
   }
 
   aiGenerator() {
@@ -155,6 +168,8 @@ class GameVsAI extends Component {
       this.state.loseLastHand.length +
       this.state.winLastHand.length +
       this.state.drawLastHand.length;
+    let anime = this.state.anime;
+    let anime2 = this.state.anime2;
     let bindButton = () => {
       return this.playGame.bind(this);
     };
@@ -195,10 +210,10 @@ class GameVsAI extends Component {
         </div>
 
         <div class="result">
-          <h2>{result}</h2>
+          <h2 style={{ visibility: anime2 }}>{result}</h2>
         </div>
 
-        <div class="hands">
+        <div class="hands" style={{ visibility: anime2 }}>
           <img
             class="player-hand"
             src={`./assets/${this.state.player}.png`}
@@ -209,6 +224,22 @@ class GameVsAI extends Component {
           <img
             class="computer-hand"
             src={`./assets/${this.state.computer}.png`}
+            height="220"
+            width="220"
+          ></img>
+        </div>
+
+        <div class="anime" style={{ visibility: anime }}>
+          <img
+            class="player-hand"
+            src={`./assets/anime.gif`}
+            height="220"
+            width="220"
+          ></img>
+          <img class="vs1" src="./assets/vs.png" height="110" width="120"></img>
+          <img
+            class="computer-hand"
+            src={`./assets/anime.gif`}
             height="220"
             width="220"
           ></img>
