@@ -146,3 +146,9 @@
 .swaptocomp {
   position: absolute;
 }
+
+.aicount {
+  margin-left: 800px;
+  color: rgb(248, 237, 237);
+  
+}
