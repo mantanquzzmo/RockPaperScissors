@@ -11,7 +11,8 @@ class GameVsComp extends Component {
       round: 1,
       lastRound: "",
       winLastHand: [],
-      loseLastHand: []
+      loseLastHand: [],
+      drawLastHand: []
     };
   }
 
@@ -20,7 +21,7 @@ class GameVsComp extends Component {
     this.state.round++;
     this.setState({
       player: event.target.id,
-      computer: computerChoice[Math.floor(Math.random() * 3)]
+      computer: this.generator()
     });
     setTimeout(() => {
       this.scoreCounter();
@@ -29,7 +30,29 @@ class GameVsComp extends Component {
         anime2: "visible"
       });
     }, 1);
-    console.log(this.state.loseLastHand)
+    console.log(this.state.drawLastHand)
+  }
+
+  generator() {
+    let computerChoice = ["rock", "paper", "scissors"];
+    return computerChoice[Math.floor(Math.random() * 3)]    
+  }
+
+  AI() {
+    switch (this.lastRound) {
+      case "Win":
+        this.winLastHand[Math.floor(Math.random() * winLastHand.length)]
+        break;
+      
+      case "Loss":
+        this.loseLastHand[Math.floor(Math.random() * loseLastHand.length)]
+        break;
+
+      case "Draw":
+        this.drawLastHand[Math.floor(Math.random() * drawLastHand.length)]
+        break;
+    }
+
   }
 
   displayWinner() {
@@ -90,7 +113,10 @@ class GameVsComp extends Component {
         
       case "it's a tie":
         this.setState(function(prevState, props) {
-          return {lastRound: "draw"}})
+          if (prevState.lastRound == "Draw") {
+          }
+        return {lastRound: "Draw",
+                drawLastHand: [...prevState.drawLastHand, this.state.player]}})
         break;
     }
   }
