@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class GameVsAI extends Component {
   constructor() {
@@ -160,6 +161,13 @@ class GameVsAI extends Component {
 
     return (
       <div class="gameDiv">
+        <Link className="link" to="/GameVsComp">
+        <img
+            class="swaptocomp"
+            src={`./assets/swaptocomp.png`}
+            height="100"
+            width="100"
+          ></img></Link>
         <div class="counter">
           <img
             class="player-pic"
