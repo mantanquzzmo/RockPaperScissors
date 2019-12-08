@@ -32,18 +32,18 @@ class GameVsAI extends Component {
   }
 
   aiGenerator() {
-    let wonLastHand = this.state.winLastHand
-    let lostLastHand = this.state.loseLastHand
-    let drewLastHand = this.state.drawLastHand
+    let wonLastHand = this.state.winLastHand;
+    let lostLastHand = this.state.loseLastHand;
+    let drewLastHand = this.state.drawLastHand;
     switch (this.state.lastRound) {
       case "Win":
-        return wonLastHand[Math.floor(Math.random() * wonLastHand.length)]
-      
+        return wonLastHand[Math.floor(Math.random() * wonLastHand.length)];
+
       case "Loss":
-        return lostLastHand[Math.floor(Math.random() * lostLastHand.length)]
+        return lostLastHand[Math.floor(Math.random() * lostLastHand.length)];
 
       case "Draw":
-        return drewLastHand[Math.floor(Math.random() * drewLastHand.length)]
+        return drewLastHand[Math.floor(Math.random() * drewLastHand.length)];
     }
   }
 
@@ -86,35 +86,42 @@ class GameVsAI extends Component {
     let result = this.displayWinner();
     switch (result.props.children) {
       case "Player wins":
-        this.state.playerWins++
-        this.setState(function(prevState, _props) {
+        this.state.playerWins++;
+        this.setState(function(prevState, _props) {
           if (prevState.lastRound == "Win") {
           }
-        return {lastRound: "Win",
-                winLastHand: [...prevState.winLastHand, this.state.player]}})
+          return {
+            lastRound: "Win",
+            winLastHand: [...prevState.winLastHand, this.state.player]
+          };
+        });
         break;
 
       case "Computer wins":
         this.state.computerWins++;
-        this.setState(function(prevState, _props) {
+        this.setState(function(prevState, _props) {
           if (prevState.lastRound == "Loss") {
           }
-        return {lastRound: "Loss",
-                loseLastHand: [...prevState.loseLastHand, this.state.player]}})
+          return {
+            lastRound: "Loss",
+            loseLastHand: [...prevState.loseLastHand, this.state.player]
+          };
+        });
         break;
-        
+
       case "it's a tie":
         this.setState(function(prevState, _props) {
-          if (prevState.lastRound == "Draw")
-          console.log(this.state.player)
-          console.log(this.state.drawLastHand)
-          return {lastRound: "Draw",
-                drawLastHand: [...prevState.drawLastHand, this.state.player]}})
+          if (prevState.lastRound == "Draw") console.log(this.state.player);
+          console.log(this.state.drawLastHand);
+          return {
+            lastRound: "Draw",
+            drawLastHand: [...prevState.drawLastHand, this.state.player]
+          };
+        });
         break;
     }
   }
-
-
+  // possible to create arrays of prevState - 2 spaces back and check for the hand after
   render() {
     let result = this.displayWinner();
     let playerWins = this.state.playerWins;
