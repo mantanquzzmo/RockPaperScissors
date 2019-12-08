@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class GameVsComp extends Component {
   constructor() {
@@ -15,19 +16,20 @@ class GameVsComp extends Component {
   }
 
   playGame(event) {
-    let onClickValue = event.target.id
+    let onClickValue = event.target.id;
     this.setState({
       anime: "visible",
       anime2: "hidden"
     });
-    
+
     let computerChoice = ["rock", "paper", "scissors"];
     this.setState((prevState, _props) => {
       return {
-      player: onClickValue,
-      computer: computerChoice[Math.floor(Math.random() * 3)],
-      round: prevState.round + 1
-    }});
+        player: onClickValue,
+        computer: computerChoice[Math.floor(Math.random() * 3)],
+        round: prevState.round + 1
+      };
+    });
 
     setTimeout(() => {
       this.scoreCounter();
@@ -85,7 +87,6 @@ class GameVsComp extends Component {
     switch (result.props.children) {
       case "Player wins":
         this.setState((prevState, _props) => {
-          
           if (prevState.lastRound == "Win") {
           }
           return {
@@ -96,7 +97,8 @@ class GameVsComp extends Component {
 
       case "Computer wins":
         this.setState((prevState, _props) => {
-          if (prevState.lastRound == "Loss") {}
+          if (prevState.lastRound == "Loss") {
+          }
           return {
             computerWins: prevState.computerWins + 1
           };
@@ -117,6 +119,13 @@ class GameVsComp extends Component {
 
     return (
       <div class="gameDiv">
+        <Link className="link" to="/GameVsAI">
+        <img
+            class="swaptocomp"
+            src={`./assets/swaptoai.png`}
+            height="100"
+            width="100"
+          ></img></Link>
         <div class="counter">
           <img
             class="player-pic"
