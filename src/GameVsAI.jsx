@@ -44,8 +44,11 @@ class GameVsAI extends Component {
 
   aiGenerator() {
     let wonLastHand = this.state.winLastHand;
+    this.aiConverter(wonLastHand)
     let lostLastHand = this.state.loseLastHand;
+    this.aiConverter(lostLastHand)
     let drewLastHand = this.state.drawLastHand;
+    this.aiConverter(drewLastHand)
     switch (this.state.lastRound) {
       case "Win":
         return wonLastHand[Math.floor(Math.random() * wonLastHand.length)];
@@ -56,6 +59,14 @@ class GameVsAI extends Component {
       case "Draw":
         return drewLastHand[Math.floor(Math.random() * drewLastHand.length)];
     }
+  }
+
+  aiConverter(array) {
+    array.forEach(function(item, i) {
+      if (item == "rock") array[i] = "paper"
+      if (item == "paper") array[i] = "scissors"
+      if (item == "scissors") array[i] = "rock"
+    })
   }
 
   displayWinner() {
