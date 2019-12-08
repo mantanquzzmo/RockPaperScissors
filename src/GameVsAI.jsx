@@ -9,10 +9,10 @@ class GameVsComp extends Component {
       playerWins: 0,
       computerWins: 0,
       round: 1,
-      lastRound: "",
-      winLastHand: [],
-      loseLastHand: [],
-      drawLastHand: []
+      lastRound: "Win",
+      winLastHand: ["rock", "paper", "scissors"],
+      loseLastHand: ["rock", "paper", "scissors"],
+      drawLastHand: ["rock", "paper", "scissors"]
     };
   }
 
@@ -21,7 +21,7 @@ class GameVsComp extends Component {
     this.state.round++;
     this.setState({
       player: event.target.id,
-      computer: this.generator()
+      computer: this.aiGenerator(this.state.lastRound)
     });
     setTimeout(() => {
       this.scoreCounter();
@@ -30,29 +30,23 @@ class GameVsComp extends Component {
         anime2: "visible"
       });
     }, 1);
-    console.log(this.state.drawLastHand)
+    console.log(this.state.winLastHand)
   }
 
-  generator() {
-    let computerChoice = ["rock", "paper", "scissors"];
-    return computerChoice[Math.floor(Math.random() * 3)]    
-  }
-
-  AI() {
-    switch (this.lastRound) {
+  aiGenerator() {
+    let wonLastHand = this.state.winLastHand
+    let lostLastHand = this.state.loseLastHand
+    let drewLastHand = this.state.drawLastHand
+    switch (this.state.lastRound) {
       case "Win":
-        this.winLastHand[Math.floor(Math.random() * winLastHand.length)]
-        break;
+        return wonLastHand[Math.floor(Math.random() * wonLastHand.length)]
       
       case "Loss":
-        this.loseLastHand[Math.floor(Math.random() * loseLastHand.length)]
-        break;
+        return lostLastHand[Math.floor(Math.random() * lostLastHand.length)]
 
       case "Draw":
-        this.drawLastHand[Math.floor(Math.random() * drawLastHand.length)]
-        break;
+        return drewLastHand[Math.floor(Math.random() * drewLastHand.length)]
     }
-
   }
 
   displayWinner() {
@@ -120,11 +114,6 @@ class GameVsComp extends Component {
         break;
     }
   }
-
-  aiCalculator() {
-
-  }
-
 
 
   render() {
