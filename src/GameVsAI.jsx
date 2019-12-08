@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 class GameVsAI extends Component {
   constructor() {
     super();
-    let startingArray = ["rock", "paper", "scissors"]
+
     this.state = {
       player: "default1",
       computer: "default2",
@@ -14,9 +14,9 @@ class GameVsAI extends Component {
       anime: "hidden",
       anime2: "visible",
       lastRound: "Draw",
-      winLastHand: startingArray,
-      loseLastHand: startingArray,
-      drawLastHand: startingArray
+      winLastHand: ["rock", "paper", "scissors"],
+      loseLastHand: ["rock", "paper", "scissors"],
+      drawLastHand: ["rock", "paper", "scissors"]
     };
   }
 
@@ -167,7 +167,7 @@ class GameVsAI extends Component {
     let aiIQ =
       this.state.loseLastHand.length +
       this.state.winLastHand.length +
-      this.state.drawLastHand.length;
+      this.state.drawLastHand.length - 9;
     let anime = this.state.anime;
     let anime2 = this.state.anime2;
     let bindButton = () => {
@@ -201,6 +201,7 @@ class GameVsAI extends Component {
             <p>{computerWins}</p>
             <h3>"AI"</h3>
           </div>
+
           <img
             class="ai-pic"
             src={`./assets/ai.png`}
@@ -208,7 +209,10 @@ class GameVsAI extends Component {
             width="120"
           ></img>
         </div>
-
+        <div class="aicount">
+          <h4>Player moves <br />calculated:
+          {aiIQ}</h4>
+          </div>
         <div class="result">
           <h2 style={{ visibility: anime2 }}>{result}</h2>
         </div>
