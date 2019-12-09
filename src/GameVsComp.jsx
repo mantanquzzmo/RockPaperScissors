@@ -10,16 +10,16 @@ class GameVsComp extends Component {
       playerWins: 0,
       computerWins: 0,
       round: 1,
-      anime: "hidden",
-      anime2: "visible"
+      divAnime: "hidden",
+      divStatic: "visible"
     };
   }
 
   playGame(event) {
     let onClickValue = event.target.id;
     this.setState({
-      anime: "visible",
-      anime2: "hidden"
+      divAnime: "visible",
+      divStatic: "hidden"
     });
 
     let computerChoice = ["rock", "paper", "scissors"];
@@ -34,8 +34,8 @@ class GameVsComp extends Component {
     setTimeout(() => {
       this.scoreCounter();
       this.setState({
-        anime: "hidden",
-        anime2: "visible"
+        divAnime: "hidden",
+        divStatic: "visible"
       });
     }, 1200);
 
@@ -111,59 +111,59 @@ class GameVsComp extends Component {
     let result = this.displayWinner();
     let playerWins = this.state.playerWins;
     let computerWins = this.state.computerWins;
-    let anime = this.state.anime;
-    let anime2 = this.state.anime2;
+    let divAnime = this.state.divAnime;
+    let divStatic = this.state.divStatic;
     let bindButton = () => {
       return this.playGame.bind(this);
     };
 
     return (
-      <div class="gameDiv">
+      <div className="gameDiv">
         <Link className="link" to="/GameVsAI">
         <img
-            class="swaptocomp"
+            className="swaptocomp"
             src={`./assets/swaptoai.png`}
             height="100"
             width="100"
           ></img></Link>
-        <div class="counter">
+        <div className="counter">
           <img
             class="player-pic"
             src={`./assets/player.png`}
             height="120"
             width="120"
           ></img>
-          <div class="player-counter">
+          <div className="player-counter">
             <p>{playerWins}</p>
             <h3>Player</h3>
           </div>
-          <div class="colon">
+          <div className="colon">
             <h1>:</h1>
           </div>
-          <div class="computer-counter">
+          <div className="computer-counter">
             <p>{computerWins}</p>
             <h3>Random</h3>
           </div>
           <img
-            class="ai-pic"
+            className="ai-pic"
             src={`./assets/computer.png`}
             height="120"
             width="120"
           ></img>
         </div>
 
-        <div class="result">
-          <h2 style={{ visibility: anime2 }}>{result}</h2>
+        <div className="result">
+          <h2 style={{ visibility: divStatic }}>{result}</h2>
         </div>
 
-        <div class="hands" style={{ visibility: anime2 }}>
+        <div className="hands" style={{ visibility: divStatic }}>
           <img
-            class="player-hand"
+            className="player-hand"
             src={`./assets/${this.state.player}.png`}
             height="220"
             width="220"
           ></img>
-          <img class="vs" src="./assets/vs.png" height="110" width="120"></img>
+          <img className="vs" src="./assets/vs.png" height="110" width="120"></img>
           <img
             class="computer-hand"
             src={`./assets/${this.state.computer}.png`}
@@ -172,23 +172,23 @@ class GameVsComp extends Component {
           ></img>
         </div>
 
-        <div class="anime" style={{ visibility: anime }}>
+        <div className="anime" style={{ visibility: divAnime }}>
           <img
             class="player-hand"
             src={`./assets/anime.gif`}
             height="220"
             width="220"
           ></img>
-          <img class="vs1" src="./assets/vs.png" height="110" width="120"></img>
+          <img className="vs1" src="./assets/vs.png" height="110" width="120"></img>
           <img
-            class="computer-hand"
+            className="computer-hand"
             src={`./assets/anime.gif`}
             height="220"
             width="220"
           ></img>
         </div>
 
-        <div class="buttons">
+        <div className="buttons">
           <button id="rock" onClick={bindButton()}>
             ROCK
           </button>
