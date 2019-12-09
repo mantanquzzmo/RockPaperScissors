@@ -1,8 +1,8 @@
-describe("Visitor can see GameVsComputer", () => {
-  it("visitor can see opponent being Random when loading page", () => {
-    cy.visit("/GameVsComp");
+describe("Visitor can see GameVsAI", () => {
+  it("visitor can see opponent being AI when loading page", () => {
+    cy.visit("/GameVsAI");
     cy.get(".counter")
-    .should("contain", "Random")
+    .should("contain", "AI")
   });
 
   it("visitor should see player counter and it should be 0", () => {
@@ -26,11 +26,11 @@ describe("Visitor can see GameVsComputer", () => {
   it('visitor should be able to switch games', () => {
     cy.get(".gameDiv").click(15, 15) 
     cy.get(".counter")
-    .should("contain", "AI")
+    .should("contain", "Random")
   });
 
   it('visitor should be able to click a button', () => {
-    cy.visit("/GameVsComp")
+    cy.visit("/GameVsAI")
     cy.get(".buttons").within(() => {
       cy.contains("ROCK").click()})
   });
@@ -40,7 +40,7 @@ describe("Visitor can see GameVsComputer", () => {
     cy.get(".result").within(() => {
       cy.contains("i")})
   });
-
+  
   it('visitor should see round two statement', () => {
     cy.wait(1000)
     cy.get(".result")
