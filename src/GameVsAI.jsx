@@ -29,13 +29,13 @@ class GameVsAI extends Component {
     this.setState((prevState, _props) => {
       switch (this.state.lastRound) {
         case "Win":
-          prevState.winLastHand.push(id);
+          prevState.winLastHand.push(this.aiConverter(id));
           break;
         case "Loss":
-          prevState.loseLastHand.push(id);
+          prevState.loseLastHand.push(this.aiConverter(id));
           break;
         case "Draw":
-          prevState.drawLastHand.push(id);
+          prevState.drawLastHand.push(this.aiConverter(id));
           break;
       }
     });
@@ -64,11 +64,9 @@ class GameVsAI extends Component {
 
   aiGenerator() {
     let wonLastHand = this.state.winLastHand;
-    this.aiConverter(wonLastHand);
     let lostLastHand = this.state.loseLastHand;
-    this.aiConverter(lostLastHand);
     let drewLastHand = this.state.drawLastHand;
-    this.aiConverter(drewLastHand);
+    console.log(wonLastHand)
     switch (this.state.lastRound) {
       case "Win":
         return wonLastHand[Math.floor(Math.random() * wonLastHand.length)];
@@ -81,12 +79,14 @@ class GameVsAI extends Component {
     }
   }
 
-  aiConverter(array) {
-    array.forEach(function(item, i) {
-      if (item == "rock") array[i] = "paper";
-      if (item == "paper") array[i] = "scissors";
-      if (item == "scissors") array[i] = "rock";
-    });
+  aiConverter(input) {
+    if (input == "rock") {
+      return "paper";
+    } else if (input == "paper") {
+      return "scissors";
+    } else if (input == "scissors") {
+      return "rock";
+    }
   }
 
   displayWinner() {
@@ -167,7 +167,8 @@ class GameVsAI extends Component {
     let aiIQ =
       this.state.loseLastHand.length +
       this.state.winLastHand.length +
-      this.state.drawLastHand.length - 9;
+      this.state.drawLastHand.length -
+      9;
     let anime = this.state.anime;
     let anime2 = this.state.anime2;
     let bindButton = () => {
@@ -177,12 +178,13 @@ class GameVsAI extends Component {
     return (
       <div class="gameDiv">
         <Link className="link" to="/GameVsComp">
-        <img
+          <img
             class="swaptocomp"
             src={`./assets/swaptocomp.png`}
             height="100"
             width="100"
-          ></img></Link>
+          ></img>
+        </Link>
         <div class="counter">
           <img
             class="player-pic"
@@ -210,9 +212,12 @@ class GameVsAI extends Component {
           ></img>
         </div>
         <div class="aicount">
-          <h4>Player moves <br />calculated:
-          {aiIQ}</h4>
-          </div>
+          <h4>
+            Player moves <br />
+            calculated:
+            {aiIQ}
+          </h4>
+        </div>
         <div class="result">
           <h2 style={{ visibility: anime2 }}>{result}</h2>
         </div>
