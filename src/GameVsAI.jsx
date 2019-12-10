@@ -218,8 +218,7 @@ class GameVsAI extends Component {
         <div className="aicount" style={{ visibility: divStatic }}>
           <h4>
             Player moves <br />
-            calculated:
-            {aiIQ}
+            calculated: {aiIQ}
           </h4>
         </div>
         <div className="result">
