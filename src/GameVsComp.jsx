@@ -113,8 +113,13 @@ class GameVsComp extends Component {
     let computerWins = this.state.computerWins;
     let divAnime = this.state.divAnime;
     let divStatic = this.state.divStatic;
-    let bindButton = () => {
-      return this.playGame.bind(this);
+    let player = this.state.player
+    let activateButton = () => {
+      if (player == "default1") {
+        return this.playGame.bind(this);
+      } else {
+        return null;
+      }
     };
 
     return (
@@ -200,13 +205,13 @@ class GameVsComp extends Component {
         </div>
 
         <div className="buttons">
-          <button id="rock" onClick={bindButton()}>
+          <button id="rock" onClick={activateButton()}>
             ROCK
           </button>
-          <button id="paper" onClick={bindButton()}>
+          <button id="paper" onClick={activateButton()}>
             PAPER
           </button>
-          <button id="scissors" onClick={bindButton()}>
+          <button id="scissors" onClick={activateButton()}>
             SCISSORS
           </button>
         </div>
