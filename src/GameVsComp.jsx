@@ -120,12 +120,13 @@ class GameVsComp extends Component {
     return (
       <div className="gameDiv">
         <Link className="link" to="/GameVsAI">
-        <img
+          <img
             className="swaptocomp"
             src={`./assets/swaptoai.png`}
             height="100"
             width="100"
-          ></img></Link>
+          ></img>
+        </Link>
         <div className="counter">
           <img
             class="player-pic"
@@ -163,7 +164,12 @@ class GameVsComp extends Component {
             height="220"
             width="220"
           ></img>
-          <img className="vs" src="./assets/vs.png" height="110" width="120"></img>
+          <img
+            className="vs"
+            src="./assets/vs.png"
+            height="110"
+            width="120"
+          ></img>
           <img
             class="computer-hand"
             src={`./assets/${this.state.computer}.png`}
@@ -179,7 +185,12 @@ class GameVsComp extends Component {
             height="220"
             width="220"
           ></img>
-          <img className="vs1" src="./assets/vs.png" height="110" width="120"></img>
+          <img
+            className="vs1"
+            src="./assets/vs.png"
+            height="110"
+            width="120"
+          ></img>
           <img
             className="computer-hand"
             src={`./assets/anime.gif`}

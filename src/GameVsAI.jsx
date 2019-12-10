@@ -21,7 +21,7 @@ class GameVsAI extends Component {
   }
 
   playGame(event) {
-    let id = event.target.id;
+    let playerClick = event.target.id;
     this.setState({
       divAnime: "visible",
       divStatic: "hidden"
@@ -29,19 +29,19 @@ class GameVsAI extends Component {
     this.setState((prevState, _props) => {
       switch (this.state.lastRound) {
         case "Win":
-          prevState.winLastHand.push(this.aiConverter(id));
+          prevState.winLastHand.push(this.aiConverter(playerClick));
           break;
         case "Loss":
-          prevState.loseLastHand.push(this.aiConverter(id));
+          prevState.loseLastHand.push(this.aiConverter(playerClick));
           break;
         case "Draw":
-          prevState.drawLastHand.push(this.aiConverter(id));
+          prevState.drawLastHand.push(this.aiConverter(playerClick));
           break;
       }
     });
     this.setState((prevState, _props) => {
       return {
-        player: id,
+        player: playerClick,
         computer: this.aiGenerator(this.state.lastRound),
         round: prevState.round + 1
       };
@@ -164,10 +164,9 @@ class GameVsAI extends Component {
     let playerWins = this.state.playerWins;
     let computerWins = this.state.computerWins;
     let aiIQ =
-      (this.state.loseLastHand.length -
-      3)+
-      (this.state.winLastHand.length - 3) +
-      (this.state.drawLastHand.length - 3);
+      this.state.loseLastHand.length +
+      this.state.winLastHand.length +
+      this.state.drawLastHand.length - 9;
     let divAnime = this.state.divAnime;
     let divStatic = this.state.divStatic;
     let bindButton = () => {
@@ -210,7 +209,7 @@ class GameVsAI extends Component {
             width="120"
           ></img>
         </div>
-        <div className="aicount">
+        <div className="aicount" style={{ visibility: divStatic }}>
           <h4>
             Player moves <br />
             calculated:
