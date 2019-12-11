@@ -22,10 +22,7 @@ class GameVsAI extends Component {
 
   playGame(event) {
     let playerClick = event.target.id;
-    this.setState({
-      divAnime: "visible",
-      divStatic: "hidden"
-    });
+
     this.setState((prevState, _props) => {
       switch (this.state.lastRound) {
         case "Win":
@@ -43,7 +40,9 @@ class GameVsAI extends Component {
       return {
         player: playerClick,
         computer: this.aiGenerator(this.state.lastRound),
-        round: prevState.round + 1
+        round: prevState.round + 1,
+        divAnime: "visible",
+        divStatic: "hidden"
       };
     });
     setTimeout(() => {
@@ -92,6 +91,8 @@ class GameVsAI extends Component {
     let player = this.state.player;
     let computer = this.state.computer;
     let round = this.state.round;
+    let playerWinDiv = <div>Player wins</div>;
+    let computerWinDiv = <div>Computer wins</div>;
 
     if (player == "default1") {
       return <div>Round: {round} Fight!</div>;
@@ -102,23 +103,23 @@ class GameVsAI extends Component {
 
     if (player == "rock") {
       if (computer == "scissors") {
-        return <div>Player wins</div>;
+        return playerWinDiv;
       } else {
-        return <div>Computer wins</div>;
+        return computerWinDiv;
       }
     }
     if (player == "paper") {
       if (computer == "rock") {
-        return <div>Player wins</div>;
+        return playerWinDiv;
       } else {
-        return <div>Computer wins</div>;
+        return computerWinDiv;
       }
     }
     if (player == "scissors") {
       if (computer == "paper") {
-        return <div>Player wins</div>;
+        return playerWinDiv;
       } else {
-        return <div>Computer wins</div>;
+        return computerWinDiv;
       }
     }
   }
@@ -128,8 +129,6 @@ class GameVsAI extends Component {
     switch (result.props.children) {
       case "Player wins":
         this.setState((prevState, _props) => {
-          if (prevState.lastRound == "Win") {
-          }
           return {
             lastRound: "Win",
             playerWins: prevState.playerWins + 1
@@ -139,8 +138,6 @@ class GameVsAI extends Component {
 
       case "Computer wins":
         this.setState((prevState, _props) => {
-          if (prevState.lastRound == "Loss") {
-          }
           return {
             lastRound: "Loss",
             computerWins: prevState.computerWins + 1
@@ -149,8 +146,7 @@ class GameVsAI extends Component {
         break;
 
       case "it's a tie":
-        this.setState((prevState, _props) => {
-          if (prevState.lastRound == "Draw")
+        this.setState((_prevState, _props) => {
             return {
               lastRound: "Draw"
             };
