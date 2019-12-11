@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 class GameVsAI extends Component {
   constructor() {
     super();
-
     this.state = {
       player: "default1",
       computer: "default2",
@@ -128,7 +127,7 @@ class GameVsAI extends Component {
     let result = this.displayWinner();
     switch (result.props.children) {
       case "Player wins":
-        this.setState((prevState, _props) => {
+        this.setState((prevState) => {
           return {
             lastRound: "Win",
             playerWins: prevState.playerWins + 1
@@ -137,7 +136,7 @@ class GameVsAI extends Component {
         break;
 
       case "Computer wins":
-        this.setState((prevState, _props) => {
+        this.setState((prevState) => {
           return {
             lastRound: "Loss",
             computerWins: prevState.computerWins + 1
@@ -146,10 +145,8 @@ class GameVsAI extends Component {
         break;
 
       case "it's a tie":
-        this.setState((_prevState, _props) => {
-            return {
-              lastRound: "Draw"
-            };
+        this.setState({
+            lastRound: "Draw"
         });
         break;
     }

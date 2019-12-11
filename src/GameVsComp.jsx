@@ -85,9 +85,7 @@ class GameVsComp extends Component {
     let result = this.displayWinner();
     switch (result.props.children) {
       case "Player wins":
-        this.setState((prevState, _props) => {
-          if (prevState.lastRound == "Win") {
-          }
+        this.setState((prevState) => {
           return {
             playerWins: prevState.playerWins + 1
           };
@@ -95,9 +93,7 @@ class GameVsComp extends Component {
         break;
 
       case "Computer wins":
-        this.setState((prevState, _props) => {
-          if (prevState.lastRound == "Loss") {
-          }
+        this.setState((prevState) => {
           return {
             computerWins: prevState.computerWins + 1
           };
