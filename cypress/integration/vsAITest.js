@@ -1,4 +1,4 @@
-describe("Visitor can see GameVsAI", () => {
+describe("Testing of GameVsAI", () => {
   it("visitor can see opponent being AI when loading page", () => {
     cy.visit("/GameVsAI");
     cy.get(".counter")
@@ -34,16 +34,21 @@ describe("Visitor can see GameVsAI", () => {
     cy.get(".buttons").within(() => {
       cy.contains("ROCK").click()})
   });
-
+  
   it('visitor should get a result', () => {
     cy.wait(1000)
     cy.get(".result").within(() => {
-      cy.contains("i")})
+      cy.contains("win")})
   });
   
-  it('visitor should see round two statement', () => {
+  it('visitor should see round 2 statement', () => {
     cy.wait(1000)
     cy.get(".result")
     .should("contain", "Round: 2 Fight!")
+  });
+
+  it('visitor should see AI intelligence updated', () => {
+    cy.get(".aicount")
+    .should("contain", "calculated: 1")
   });
 });

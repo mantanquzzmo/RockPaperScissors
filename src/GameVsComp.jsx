@@ -55,7 +55,7 @@ class GameVsComp extends Component {
       return <div>Round: {round} Fight!</div>;
     }
     if (player == computer) {
-      return <div>it's a tie</div>;
+      return <div>Draw! No winner</div>;
     }
 
     if (player == "rock") {

@@ -1,4 +1,4 @@
-describe("Visitor can see GameVsComputer", () => {
+describe("Testing of GameVsComputer", () => {
   it("visitor can see opponent being Random when loading page", () => {
     cy.visit("/GameVsComp");
     cy.get(".counter")
@@ -38,7 +38,7 @@ describe("Visitor can see GameVsComputer", () => {
   it('visitor should get a result', () => {
     cy.wait(1000)
     cy.get(".result").within(() => {
-      cy.contains("i")})
+      cy.contains("win")})
   });
 
   it('visitor should see round two statement', () => {
