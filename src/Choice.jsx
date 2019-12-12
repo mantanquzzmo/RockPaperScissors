@@ -9,7 +9,7 @@ const Choice = () => {
       </header>
       <h3>Play vs Random or vs AI</h3>
       <img
-        className="play-link"
+        className="playerimg"
         src={`./assets/player.png`}
         height="120"
         width="120"

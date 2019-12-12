@@ -4,8 +4,8 @@ describe("Visitor can see player image", () => {
     cy.get(".choiceDiv").should("contain", "RockPaperScissors");
   });
 
-  it("Visitor should see playerimage", () => {
-    cy.get(".choiceDiv").find(".play-link");
+  it("Visitor should see Gamename", () => {
+    cy.get(".choiceDiv").find(".playerimg");
   });
 
   it("Visitor should be able to go to gameVsComp", () => {
