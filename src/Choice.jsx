@@ -9,12 +9,12 @@ const Choice = () => {
       </header>
       <h3>Play vs Random or vs AI</h3>
       <img
-        className="play-link"
+        className="playerimg"
         src={`./assets/player.png`}
         height="120"
         width="120"
       ></img>
-      <Link className="link" to="/GameVsComp">
+      <Link className="vsComp" to="/GameVsComp">
         <div className="Opponentpic">
           <img
             className="comp-link"
@@ -25,7 +25,7 @@ const Choice = () => {
         </div>
       </Link>
 
-      <Link className="link" to="/GameVsAI">
+      <Link className="vsAI" to="/GameVsAI">
         <div className="Opponentpic">
           <img
             className="ai-link"

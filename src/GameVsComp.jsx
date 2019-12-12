@@ -17,17 +17,14 @@ class GameVsComp extends Component {
 
   playGame(event) {
     let onClickValue = event.target.id;
-    this.setState({
-      divAnime: "visible",
-      divStatic: "hidden"
-    });
-
     let computerChoice = ["rock", "paper", "scissors"];
     this.setState((prevState, _props) => {
       return {
         player: onClickValue,
         computer: computerChoice[Math.floor(Math.random() * 3)],
-        round: prevState.round + 1
+        round: prevState.round + 1,
+        divAnime: "visible",
+        divStatic: "hidden"
       };
     });
 
@@ -51,33 +48,35 @@ class GameVsComp extends Component {
     let player = this.state.player;
     let computer = this.state.computer;
     let round = this.state.round;
+    let playerWinDiv = <div>Player wins</div>;
+    let computerWinDiv = <div>Computer wins</div>;
 
     if (player == "default1") {
       return <div>Round: {round} Fight!</div>;
     }
     if (player == computer) {
-      return <div>it's a tie</div>;
+      return <div>Draw! No winner</div>;
     }
 
     if (player == "rock") {
       if (computer == "scissors") {
-        return <div>Player wins</div>;
+        return playerWinDiv;
       } else {
-        return <div>Computer wins</div>;
+        return computerWinDiv;
       }
     }
     if (player == "paper") {
       if (computer == "rock") {
-        return <div>Player wins</div>;
+        return playerWinDiv;
       } else {
-        return <div>Computer wins</div>;
+        return computerWinDiv;
       }
     }
     if (player == "scissors") {
       if (computer == "paper") {
-        return <div>Player wins</div>;
+        return playerWinDiv;
       } else {
-        return <div>Computer wins</div>;
+        return computerWinDiv;
       }
     }
   }
@@ -86,9 +85,7 @@ class GameVsComp extends Component {
     let result = this.displayWinner();
     switch (result.props.children) {
       case "Player wins":
-        this.setState((prevState, _props) => {
-          if (prevState.lastRound == "Win") {
-          }
+        this.setState((prevState) => {
           return {
             playerWins: prevState.playerWins + 1
           };
@@ -96,9 +93,7 @@ class GameVsComp extends Component {
         break;
 
       case "Computer wins":
-        this.setState((prevState, _props) => {
-          if (prevState.lastRound == "Loss") {
-          }
+        this.setState((prevState) => {
           return {
             computerWins: prevState.computerWins + 1
           };
@@ -113,8 +108,8 @@ class GameVsComp extends Component {
     let computerWins = this.state.computerWins;
     let divAnime = this.state.divAnime;
     let divStatic = this.state.divStatic;
-    let player = this.state.player
-    let activateButton = () => {
+    let player = this.state.player;
+    let activeButton = () => {
       if (player == "default1") {
         return this.playGame.bind(this);
       } else {
@@ -205,13 +200,13 @@ class GameVsComp extends Component {
         </div>
 
         <div className="buttons">
-          <button id="rock" onClick={activateButton()}>
+          <button id="rock" onClick={activeButton()}>
             ROCK
           </button>
-          <button id="paper" onClick={activateButton()}>
+          <button id="paper" onClick={activeButton()}>
             PAPER
           </button>
-          <button id="scissors" onClick={activateButton()}>
+          <button id="scissors" onClick={activeButton()}>
             SCISSORS
           </button>
         </div>
