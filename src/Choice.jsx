@@ -15,7 +15,7 @@ const Choice = () => {
         width="120"
       ></img>
       <Link className="vsComp" to="/GameVsComp">
-        <div className="opponenPic">
+        <div className="opponentPic">
           <img
             className="comp-link"
             src={`./assets/computer.png`}
