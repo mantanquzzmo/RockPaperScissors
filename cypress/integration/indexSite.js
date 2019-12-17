@@ -5,7 +5,7 @@ describe("Visitor can see player image", () => {
   });
 
   it("Visitor should see Gamename", () => {
-    cy.get(".choiceDiv").find(".playerimg");
+    cy.get(".choiceDiv").find(".playerImg");
   });
 
   it("Visitor should be able to go to gameVsComp", () => {
