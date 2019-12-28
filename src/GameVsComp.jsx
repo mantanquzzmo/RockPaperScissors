@@ -1,53 +1,39 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Link } from "react-router-dom";
 
-class GameVsComp extends Component {
-  constructor() {
-    super();
-    this.state = {
-      player: "default1",
-      computer: "default2",
-      playerWins: 0,
-      computerWins: 0,
-      round: 1,
-      divAnime: "hidden",
-      divStatic: "visible"
-    };
-  }
+const GameVsComp = () => {
+  const [playerHand, setPlayerHand] = useState("default1");
+  const [cpuHand, setCpuHand] = useState("default2");
+  const [playerWins, setPlayerWins] = useState(0);
+  const [cpuWins, setCpuWins] = useState(0);
+  const [round, setRound] = useState(1);
+  const [divAnime, setDivAnime] = useState("hidden");
+  const [divStatic, setDivStatic] = useState("visible");
 
-  playGame(event) {
+  const playGame = (event) => {
     let onClickValue = event.target.id;
-    let computerChoice = ["rock", "paper", "scissors"];
-    this.setState((prevState, _props) => {
-      return {
-        player: onClickValue,
-        computer: computerChoice[Math.floor(Math.random() * 3)],
-        round: prevState.round + 1,
-        divAnime: "visible",
-        divStatic: "hidden"
-      };
-    });
+    let cpuChoice = ["rock", "paper", "scissors"];
+    setPlayerHand(onClickValue);
+    setCpuHand(cpuChoice[Math.floor(Math.random() * 3)]);
+    setRound(prevState => prevState + 1);
+    setDivAnime("hidden");
+    setDivStatic("visible");
 
     setTimeout(() => {
-      this.scoreCounter();
-      this.setState({
-        divAnime: "hidden",
-        divStatic: "visible"
-      });
+      {scoreCounter()};
+      setDivAnime("hidden");
+      setDivStatic("visible");
     }, 1200);
 
     setTimeout(() => {
-      this.setState({
-        player: "default1",
-        computer: "default2"
-      });
+      setPlayerHand("default1");
+      setCpuHand("default2");
     }, 2500);
-  }
+  };
 
-  displayWinner() {
-    let player = this.state.player;
-    let computer = this.state.computer;
-    let round = this.state.round;
+  const displayWinner = () => {
+    let player = playerHand; //try to refactor by using only playerHand
+    let computer = cpuHand;
     let playerWinDiv = <div>Player wins</div>;
     let computerWinDiv = <div>Computer wins</div>;
 
@@ -79,140 +65,124 @@ class GameVsComp extends Component {
         return computerWinDiv;
       }
     }
-  }
+  };
 
-  scoreCounter() {
-    let result = this.displayWinner();
+  const scoreCounter = () => {
+    let result = {displayWinner}
     switch (result.props.children) {
       case "Player wins":
-        this.setState((prevState) => {
-          return {
-            playerWins: prevState.playerWins + 1
-          };
-        });
+        setPlayerWins(prevState => prevState + 1);
         break;
 
       case "Computer wins":
-        this.setState((prevState) => {
-          return {
-            computerWins: prevState.computerWins + 1
-          };
-        });
+        setCpuWins(prevState => prevState + 1);
         break;
     }
-  }
+  };
 
-  render() {
-    let result = this.displayWinner();
-    let playerWins = this.state.playerWins;
-    let computerWins = this.state.computerWins;
-    let divAnime = this.state.divAnime;
-    let divStatic = this.state.divStatic;
-    let player = this.state.player;
-    let activeButton = () => {
-      if (player == "default1") {
-        return this.playGame.bind(this);
-      } else {
-        return null;
-      }
-    };
+  const activeButton = () => {
+    if (playerHand == "default1") {
+      {playGame(event)}
+    } else {
+      return null;
+    }
+  };
 
-    return (
-      <div className="gameDiv">
-        <Link className="link" to="/GameVsAI">
-          <img
-            className="swaptocomp"
-            src={`./assets/swaptoai.png`}
-            height="100"
-            width="100"
-          ></img>
-        </Link>
-        <div className="counter">
-          <img
-            class="player-pic"
-            src={`./assets/player.png`}
-            height="120"
-            width="120"
-          ></img>
-          <div className="player-counter">
-            <p>{playerWins}</p>
-            <h3>Player</h3>
-          </div>
-          <div className="colon">
-            <h1>:</h1>
-          </div>
-          <div className="computer-counter">
-            <p>{computerWins}</p>
-            <h3>Random</h3>
-          </div>
-          <img
-            className="ai-pic"
-            src={`./assets/computer.png`}
-            height="120"
-            width="120"
-          ></img>
+  return (
+    <div className="gameDiv">
+      <Link className="link" to="/GameVsAI">
+        <img
+          className="swaptocomp"
+          src={`./assets/swaptoai.png`}
+          height="100"
+          width="100"
+        ></img>
+      </Link>
+      <div className="counter">
+        <img
+          class="player-pic"
+          src={`./assets/player.png`}
+          height="120"
+          width="120"
+        ></img>
+        <div className="player-counter">
+          <p>{playerWins}</p>
+          <h3>Player</h3>
         </div>
-
-        <div className="result">
-          <h2 style={{ visibility: divStatic }}>{result}</h2>
+        <div className="colon">
+          <h1>:</h1>
         </div>
-
-        <div className="hands" style={{ visibility: divStatic }}>
-          <img
-            className="player-hand"
-            src={`./assets/${this.state.player}.png`}
-            height="220"
-            width="220"
-          ></img>
-          <img
-            className="vs"
-            src="./assets/vs.png"
-            height="110"
-            width="120"
-          ></img>
-          <img
-            class="computer-hand"
-            src={`./assets/${this.state.computer}.png`}
-            height="220"
-            width="220"
-          ></img>
+        <div className="computer-counter">
+          <p>{cpuWins}</p>
+          <h3>Random</h3>
         </div>
-
-        <div className="anime" style={{ visibility: divAnime }}>
-          <img
-            class="player-hand"
-            src={`./assets/anime.gif`}
-            height="220"
-            width="220"
-          ></img>
-          <img
-            className="vs1"
-            src="./assets/vs.png"
-            height="110"
-            width="120"
-          ></img>
-          <img
-            className="computer-hand"
-            src={`./assets/anime.gif`}
-            height="220"
-            width="220"
-          ></img>
-        </div>
-
-        <div className="buttons">
-          <button id="rock" onClick={activeButton()}>
-            ROCK
-          </button>
-          <button id="paper" onClick={activeButton()}>
-            PAPER
-          </button>
-          <button id="scissors" onClick={activeButton()}>
-            SCISSORS
-          </button>
-        </div>
+        <img
+          className="ai-pic"
+          src={`./assets/computer.png`}
+          height="120"
+          width="120"
+        ></img>
       </div>
-    );
-  }
-}
+
+      <div className="result">
+        <h2 style={{ visibility: divStatic }}>{displayWinner()}</h2>
+      </div>
+
+      <div className="hands" style={{ visibility: divStatic }}>
+        <img
+          className="player-hand"
+          src={`./assets/${playerHand}.png`}
+          height="220"
+          width="220"
+        ></img>
+        <img
+          className="vs"
+          src="./assets/vs.png"
+          height="110"
+          width="120"
+        ></img>
+        <img
+          class="computer-hand"
+          src={`./assets/${cpuHand}.png`}
+          height="220"
+          width="220"
+        ></img>
+      </div>
+
+      <div className="anime" style={{ visibility: divAnime }}>
+        <img
+          class="player-hand"
+          src={`./assets/anime.gif`}
+          height="220"
+          width="220"
+        ></img>
+        <img
+          className="vs1"
+          src="./assets/vs.png"
+          height="110"
+          width="120"
+        ></img>
+        <img
+          className="computer-hand"
+          src={`./assets/anime.gif`}
+          height="220"
+          width="220"
+        ></img>
+      </div>
+
+      <div className="buttons">
+        <button id="rock" onClick={activeButton}>
+          ROCK
+        </button>
+        <button id="paper" onClick={activeButton}>
+          PAPER
+        </button>
+        <button id="scissors" onClick={activeButton}>
+          SCISSORS
+        </button>
+      </div>
+    </div>
+  );
+};
 
 export default GameVsComp;

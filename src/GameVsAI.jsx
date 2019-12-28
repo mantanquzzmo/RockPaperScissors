@@ -125,6 +125,7 @@ class GameVsAI extends Component {
 
   scoreCounter() {
     let result = this.displayWinner();
+    debugger
     switch (result.props.children) {
       case "Player wins":
         this.setState((prevState) => {
