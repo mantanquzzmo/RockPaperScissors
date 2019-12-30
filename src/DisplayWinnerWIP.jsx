@@ -9,7 +9,7 @@ console.log(playerHand)
 }
 // const DisplayWinner = () => {
 //   let playerWinDiv = 'Player wins';
-//   let computerWinDiv ='Computer wins';
+  // let computerWinDiv = {`#{round}`} 'Computer wins';
 
 //   if (playerHand == "default1") {
 //     return <div>Round: {round} Fight!</div>
