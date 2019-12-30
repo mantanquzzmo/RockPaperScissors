@@ -1,70 +1,29 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Buttons } from "./Buttons"
 
-class GameVsAI extends Component {
-  constructor() {
-    super();
-    this.state = {
-      player: "default1",
-      computer: "default2",
-      playerWins: 0,
-      computerWins: 0,
-      round: 1,
-      divAnime: "hidden",
-      divStatic: "visible",
-      lastRound: "Draw",
-      winLastHand: ["rock", "paper", "scissors"],
-      loseLastHand: ["rock", "paper", "scissors"],
-      drawLastHand: ["rock", "paper", "scissors"]
-    };
-  }
+const GameVsAI = () => {
+  const [playerHand, setPlayerHand] = useState("default1");
+  const [cpuHand, setCpuHand] = useState("default2");
+  const [playerWins, setPlayerWins] = useState(0);
+  const [cpuWins, setCpuWins] = useState(0);
+  const [round, setRound] = useState(1);
+  const [divAnime, setDivAnime] = useState(["hidden", "visible"]);
+  const [lastRound, setLastRound] = useState("Draw");
+  const [wonLastHand, setWonLastHand] = useState(["rock", "paper", "scissors"]);
+  const [lostLastHand, setLostLastHand] = useState([
+    "rock",
+    "paper",
+    "scissors"
+  ]);
+  const [drewLastHand, setDrewLastHand] = useState([
+    "rock",
+    "paper",
+    "scissors"
+  ]);
 
-  playGame(event) {
-    let playerClick = event.target.id;
-
-    this.setState((prevState, _props) => {
-      switch (this.state.lastRound) {
-        case "Win":
-          prevState.winLastHand.push(this.aiConverter(playerClick));
-          break;
-        case "Loss":
-          prevState.loseLastHand.push(this.aiConverter(playerClick));
-          break;
-        case "Draw":
-          prevState.drawLastHand.push(this.aiConverter(playerClick));
-          break;
-      }
-    });
-    this.setState((prevState, _props) => {
-      return {
-        player: playerClick,
-        computer: this.aiGenerator(this.state.lastRound),
-        round: prevState.round + 1,
-        divAnime: "visible",
-        divStatic: "hidden"
-      };
-    });
-    setTimeout(() => {
-      this.scoreCounter();
-      this.setState({
-        divAnime: "hidden",
-        divStatic: "visible"
-      });
-    }, 1200);
-
-    setTimeout(() => {
-      this.setState({
-        player: "default1",
-        computer: "default2"
-      });
-    }, 2500);
-  }
-
-  aiGenerator() {
-    let wonLastHand = this.state.winLastHand;
-    let lostLastHand = this.state.loseLastHand;
-    let drewLastHand = this.state.drawLastHand;
-    switch (this.state.lastRound) {
+  const aiGenerator = () => {
+    switch (lastRound) {
       case "Win":
         return wonLastHand[Math.floor(Math.random() * wonLastHand.length)];
 
@@ -74,9 +33,9 @@ class GameVsAI extends Component {
       case "Draw":
         return drewLastHand[Math.floor(Math.random() * drewLastHand.length)];
     }
-  }
+  };
 
-  aiConverter(input) {
+  const aiConverter = input => {
     if (input == "rock") {
       return "paper";
     } else if (input == "paper") {
@@ -84,191 +43,202 @@ class GameVsAI extends Component {
     } else if (input == "scissors") {
       return "rock";
     }
-  }
+  };
 
-  displayWinner() {
-    let player = this.state.player;
-    let computer = this.state.computer;
-    let round = this.state.round;
+  const playGame = event => {
+    setPlayerHand(event.target.id);
+    setCpuHand(aiGenerator(lastRound));
+    setRound(prevState => prevState + 1);
+    setDivAnime(["visible", "hidden"]);
+
+    setTimeout(() => {
+      scoreCounter();
+      setDivAnime(["hidden", "visible"]);
+    }, 1200);
+
+    setTimeout(() => {
+      setPlayerHand("default1");
+      setCpuHand("default2");
+    }, 2500);
+
+    switch (lastRound) {
+      case "Win":
+        setWonLastHand(prevState =>
+          [...prevState, aiConverter(event.target.id)]
+        );
+        break;
+      case "Loss":
+        setLostLastHand(prevState =>
+          [...prevState, aiConverter(event.target.id)]
+        );
+        break;
+      case "Draw":
+        setDrewLastHand(prevState =>
+          [...prevState, aiConverter(event.target.id)]
+        );
+        break;
+    }
+  };
+
+  const displayWinner = () => {
     let playerWinDiv = <div>Player wins</div>;
     let computerWinDiv = <div>Computer wins</div>;
 
-    if (player == "default1") {
+    if (playerHand == "default1") {
       return <div>Round: {round} Fight!</div>;
     }
-    if (player == computer) {
+    if (playerHand == cpuHand) {
       return <div>it's a tie</div>;
     }
 
-    if (player == "rock") {
-      if (computer == "scissors") {
+    if (playerHand == "rock") {
+      if (cpuHand == "scissors") {
         return playerWinDiv;
       } else {
         return computerWinDiv;
       }
     }
-    if (player == "paper") {
-      if (computer == "rock") {
+    if (playerHand == "paper") {
+      if (cpuHand == "rock") {
         return playerWinDiv;
       } else {
         return computerWinDiv;
       }
     }
-    if (player == "scissors") {
-      if (computer == "paper") {
+    if (playerHand == "scissors") {
+      if (cpuHand == "paper") {
         return playerWinDiv;
       } else {
         return computerWinDiv;
       }
     }
-  }
+  };
+  let result = displayWinner();
 
-  scoreCounter() {
-    let result = this.displayWinner();
-    switch (result.props.children) {
+  const scoreCounter = () => {
+    switch (document.getElementById("1").children[0].textContent) {
       case "Player wins":
-        this.setState((prevState) => {
-          return {
-            lastRound: "Win",
-            playerWins: prevState.playerWins + 1
-          };
-        });
+        setLastRound("Win");
+        setPlayerWins(prevState => prevState + 1);
         break;
 
       case "Computer wins":
-        this.setState((prevState) => {
-          return {
-            lastRound: "Loss",
-            computerWins: prevState.computerWins + 1
-          };
-        });
+        setLastRound("Loss");
+        setCpuWins(prevState => prevState + 1);
         break;
 
       case "it's a tie":
-        this.setState({
-            lastRound: "Draw"
-        });
+        setLastRound("Draw");
         break;
     }
-  }
+  };
 
-  render() {
-    let result = this.displayWinner();
-    let playerWins = this.state.playerWins;
-    let computerWins = this.state.computerWins;
-    let aiIQ =
-      this.state.loseLastHand.length +
-      this.state.winLastHand.length +
-      this.state.drawLastHand.length -
-      9;
-    let divAnime = this.state.divAnime;
-    let divStatic = this.state.divStatic;
-    let player = this.state.player;
-    let activateButton = () => {
-      if (player == "default1") {
-        return this.playGame.bind(this);
-      } else {
-        return null;
-      }
-    };
+  let aiIQ = lostLastHand.length + wonLastHand.length + drewLastHand.length - 9;
 
-    return (
-      <div className="gameDiv">
-        <Link className="link" to="/GameVsComp">
-          <img
-            className="swaptocomp"
-            src={`./assets/swaptocomp.png`}
-            height="100"
-            width="100"
-          ></img>
-        </Link>
-        <div className="counter">
-          <img
-            className="player-pic"
-            src={`./assets/player.png`}
-            height="120"
-            width="120"
-          ></img>
-          <div className="player-counter">
-            <p>{playerWins}</p>
-            <h3>Player</h3>
-          </div>
-          <div className="colon">
-            <h1>:</h1>
-          </div>
-          <div className="computer-counter">
-            <p>{computerWins}</p>
-            <h3>"AI"</h3>
-          </div>
+  const activeButton = () => {
+    if (playerHand == "default1") {
+      playGame(event);
+    } else {
+      return null;
+    }
+  };
 
-          <img
-            className="ai-pic"
-            src={`./assets/ai.png`}
-            height="120"
-            width="120"
-          ></img>
+  return (
+    <div className="gameDiv">
+      <Link className="link" to="/GameVsComp">
+        <img
+          className="swaptocomp"
+          src={`./assets/swaptocomp.png`}
+          height="100"
+          width="100"
+        ></img>
+      </Link>
+      <div className="counter">
+        <img
+          className="player-pic"
+          src={`./assets/player.png`}
+          height="120"
+          width="120"
+        ></img>
+        <div className="player-counter">
+          <p>{playerWins}</p>
+          <h3>Player</h3>
         </div>
-        <div className="aicount" style={{ visibility: divStatic }}>
-          <h4>
-            Player moves <br />
-            calculated: {aiIQ}
-          </h4>
+        <div className="colon">
+          <h1>:</h1>
         </div>
-        <div className="result">
-          <h2 style={{ visibility: divStatic }}>{result}</h2>
+        <div className="computer-counter">
+          <p>{cpuWins}</p>
+          <h3>"AI"</h3>
         </div>
 
-        <div className="hands" style={{ visibility: divStatic }}>
-          <img
-            className="player-hand"
-            src={`./assets/${this.state.player}.png`}
-            height="220"
-            width="220"
-          ></img>
-          <img
-            className="vs"
-            src="./assets/vs.png"
-            height="110"
-            width="120"
-          ></img>
-          <img
-            className="computer-hand"
-            src={`./assets/${this.state.computer}.png`}
-            height="220"
-            width="220"
-          ></img>
-        </div>
-
-        <div className="anime" style={{ visibility: divAnime }}>
-          <img
-            className="player-hand"
-            src={`./assets/anime.gif`}
-            height="220"
-            width="220"
-          ></img>
-          <img class="vs1" src="./assets/vs.png" height="110" width="120"></img>
-          <img
-            className="computer-hand"
-            src={`./assets/anime.gif`}
-            height="220"
-            width="220"
-          ></img>
-        </div>
-
-        <div className="buttons">
-          <button id="rock" onClick={activateButton()}>
-            ROCK
-          </button>
-          <button id="paper" onClick={activateButton()}>
-            PAPER
-          </button>
-          <button id="scissors" onClick={activateButton()}>
-            SCISSORS
-          </button>
-        </div>
+        <img
+          className="ai-pic"
+          src={`./assets/ai.png`}
+          height="120"
+          width="120"
+        ></img>
       </div>
-    );
-  }
-}
+      <div className="aicount" style={{ visibility: divAnime[1] }}>
+        <h4>
+          Player moves <br />
+          calculated: {aiIQ}
+        </h4>
+      </div>
+      <div className="result" id="1">
+        <h2 style={{ visibility: divAnime[1] }}>{result}</h2>
+      </div>
+
+      <div className="hands" style={{ visibility: divAnime[1] }}>
+        <img
+          className="player-hand"
+          src={`./assets/${playerHand}.png`}
+          height="220"
+          width="220"
+        ></img>
+        <img
+          className="vs"
+          src="./assets/vs.png"
+          height="110"
+          width="120"
+        ></img>
+        <img
+          className="computer-hand"
+          src={`./assets/${cpuHand}.png`}
+          height="220"
+          width="220"
+        ></img>
+      </div>
+
+      <div className="anime" style={{ visibility: divAnime[0] }}>
+        <img
+          className="player-hand"
+          src={`./assets/anime.gif`}
+          height="220"
+          width="220"
+        ></img>
+        <img className="vs1" src="./assets/vs.png" height="110" width="120"></img>
+        <img
+          className="computer-hand"
+          src={`./assets/anime.gif`}
+          height="220"
+          width="220"
+        ></img>
+      </div>
+
+      <div className="buttons">
+        <button id="rock" onClick={activeButton}>
+          ROCK
+        </button>
+        <button id="paper" onClick={activeButton}>
+          PAPER
+        </button>
+        <button id="scissors" onClick={activeButton}>
+          SCISSORS
+        </button>
+      </div>
+    </div>
+  );
+};
 
 export default GameVsAI;

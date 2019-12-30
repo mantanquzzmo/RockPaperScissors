@@ -63,12 +63,10 @@ const GameVsComp = () => {
   const scoreCounter = () => {
     switch (document.getElementById("1").children[0].textContent) {
       case "Player wins":
-        debugger;
         setPlayerWins(prevState => prevState + 1);
         break;
 
       case "Computer wins":
-        debugger;
         setCpuWins(prevState => prevState + 1);
         break;
     }
