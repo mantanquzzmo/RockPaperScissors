@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Buttons } from "./Buttons"
 
 const GameVsAI = () => {
   const [playerHand, setPlayerHand] = useState("default1");
