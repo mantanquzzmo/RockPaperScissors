@@ -1,5 +1,6 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { DisplayWinner } from "./DisplayWinner"
 
 const GameVsComp = () => {
   const [playerHand, setPlayerHand] = useState("default1");
@@ -27,39 +28,6 @@ const GameVsComp = () => {
     }, 2500);
   };
 
-  const displayWinner = () => {
-    let playerWinDiv = <div>Player wins</div>;
-    let computerWinDiv = <div>Computer wins</div>;
-
-    if (playerHand == "default1") {
-      return <div>Round: {round} Fight!</div>;
-    }
-    if (playerHand == cpuHand) {
-      return <div>Draw! No winner</div>;
-    }
-
-    if (playerHand == "rock") {
-      if (cpuHand == "scissors") {
-        return playerWinDiv;
-      } else {
-        return computerWinDiv;
-      }
-    }
-    if (playerHand == "paper") {
-      if (cpuHand == "rock") {
-        return playerWinDiv;
-      } else {
-        return computerWinDiv;
-      }
-    }
-    if (playerHand == "scissors") {
-      if (cpuHand == "paper") {
-        return playerWinDiv;
-      } else {
-        return computerWinDiv;
-      }
-    }
-  };
   const scoreCounter = () => {
     switch (document.getElementById("1").children[0].textContent) {
       case "Player wins":
@@ -80,7 +48,7 @@ const GameVsComp = () => {
     }
   };
 
-  const result = displayWinner();
+  const result = <DisplayWinner playerHand={playerHand} cpuHand={cpuHand} round={round} />
 
   return (
     <div className="gameDiv">

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Buttons } from "./Buttons"
+import { DisplayWinner } from "./DisplayWinner"
 
 const GameVsAI = () => {
   const [playerHand, setPlayerHand] = useState("default1");
@@ -80,40 +80,7 @@ const GameVsAI = () => {
     }
   };
 
-  const displayWinner = () => {
-    let playerWinDiv = <div>Player wins</div>;
-    let computerWinDiv = <div>Computer wins</div>;
-
-    if (playerHand == "default1") {
-      return <div>Round: {round} Fight!</div>;
-    }
-    if (playerHand == cpuHand) {
-      return <div>it's a tie</div>;
-    }
-
-    if (playerHand == "rock") {
-      if (cpuHand == "scissors") {
-        return playerWinDiv;
-      } else {
-        return computerWinDiv;
-      }
-    }
-    if (playerHand == "paper") {
-      if (cpuHand == "rock") {
-        return playerWinDiv;
-      } else {
-        return computerWinDiv;
-      }
-    }
-    if (playerHand == "scissors") {
-      if (cpuHand == "paper") {
-        return playerWinDiv;
-      } else {
-        return computerWinDiv;
-      }
-    }
-  };
-  let result = displayWinner();
+  let result = <DisplayWinner playerHand={playerHand} cpuHand={cpuHand} round={round} />
 
   const scoreCounter = () => {
     switch (document.getElementById("1").children[0].textContent) {
