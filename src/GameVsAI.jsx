@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { DisplayWinner } from "./DisplayWinner"
+import { DisplayWinner } from "./DisplayWinner";
 
 const GameVsAI = () => {
   const [playerHand, setPlayerHand] = useState("default1");
@@ -63,24 +63,25 @@ const GameVsAI = () => {
 
     switch (lastRound) {
       case "Win":
-        setWonLastHand(prevState =>
-          [...prevState, aiConverter(event.target.id)]
-        );
+        setWonLastHand(prevState => [
+          ...prevState,
+          aiConverter(event.target.id)
+        ]);
         break;
       case "Loss":
-        setLostLastHand(prevState =>
-          [...prevState, aiConverter(event.target.id)]
-        );
+        setLostLastHand(prevState => [
+          ...prevState,
+          aiConverter(event.target.id)
+        ]);
         break;
       case "Draw":
-        setDrewLastHand(prevState =>
-          [...prevState, aiConverter(event.target.id)]
-        );
+        setDrewLastHand(prevState => [
+          ...prevState,
+          aiConverter(event.target.id)
+        ]);
         break;
     }
   };
-
-  let result = <DisplayWinner playerHand={playerHand} cpuHand={cpuHand} round={round} />
 
   const scoreCounter = () => {
     switch (document.getElementById("1").children[0].textContent) {
@@ -152,9 +153,13 @@ const GameVsAI = () => {
           calculated: {aiIQ}
         </h4>
       </div>
-      <div className="result" id="1">
-        <h2 style={{ visibility: divAnime[1] }}>{result}</h2>
-      </div>
+
+          <DisplayWinner
+            playerHand={playerHand}
+            cpuHand={cpuHand}
+            round={round}
+            divAnime={divAnime}
+          />
 
       <div className="hands" style={{ visibility: divAnime[1] }}>
         <img
@@ -184,7 +189,12 @@ const GameVsAI = () => {
           height="220"
           width="220"
         ></img>
-        <img className="vs1" src="./assets/vs.png" height="110" width="120"></img>
+        <img
+          className="vs1"
+          src="./assets/vs.png"
+          height="110"
+          width="120"
+        ></img>
         <img
           className="computer-hand"
           src={`./assets/anime.gif`}

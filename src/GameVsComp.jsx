@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { DisplayWinner } from "./DisplayWinner"
+import { DisplayWinner } from "./DisplayWinner";
 
 const GameVsComp = () => {
   const [playerHand, setPlayerHand] = useState("default1");
@@ -48,8 +48,6 @@ const GameVsComp = () => {
     }
   };
 
-  const result = <DisplayWinner playerHand={playerHand} cpuHand={cpuHand} round={round} />
-
   return (
     <div className="gameDiv">
       <Link className="link" to="/GameVsAI">
@@ -86,9 +84,12 @@ const GameVsComp = () => {
         ></img>
       </div>
 
-      <div className="result" id="1">
-        <h2 style={{ visibility: divAnime[1] }}>{result}</h2>
-      </div>
+      <DisplayWinner
+        playerHand={playerHand}
+        cpuHand={cpuHand}
+        round={round}
+        divAnime={divAnime}
+      />
 
       <div className="hands" style={{ visibility: divAnime[1] }}>
         <img
